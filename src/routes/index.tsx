@@ -2,15 +2,17 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useState, useEffect } from "react";
 import {
   Phone, Calendar, ShieldCheck, MapPin, Clock, Home, Building2, Landmark,
-  Wrench, Siren, CheckCircle2, ArrowRight, Mail, Menu, X, Droplets,
+  Wrench, Siren, CheckCircle2, ArrowRight, Mail, Droplets,
   Gauge, Star, AlertTriangle, Zap,
 } from "lucide-react";
-import hero1 from "@/assets/hero-new1.jpg";
-import hero2 from "@/assets/hero-new2.jpg";
+import hero1 from "@/assets/hero-water-leak.jpg";
+import hero2 from "@/assets/hero-burst-pipe.jpg";
 import hero3 from "@/assets/hero-new3.jpg";
 import { VoiceWidget } from "@/components/site/VoiceWidget";
 import { AlexChat } from "@/components/site/AlexChat";
 import { Reveal } from "@/components/site/Reveal";
+import { SiteHeader } from "@/components/site/SiteHeader";
+import { SiteFooter } from "@/components/site/SiteFooter";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -33,24 +35,27 @@ const GHL_BOOKING_URL = "#book"; // Replace with GoHighLevel calendar link when 
 const HERO_SLIDES = [
   {
     img: hero1,
-    badge: "Southern Maryland's Trusted Plumbers — 24/7",
-    line1: "Need a Plumber",
-    line2: "Right Now?",
-    sub: "EPR Plumbing & Remodeling serves Charles, Prince George's, Calvert & St. Mary's Counties. Book online or call — we'll be there.",
+    flip: false,
+    badge: "24/7 Emergency Plumbing · Southern Maryland",
+    line1: "Water on Your Floor?",
+    line2: "Stop the Damage Now.",
+    sub: "Every minute a leak runs, the damage grows. EPR Plumbing dispatches fast across Charles, Prince George's, Calvert & St. Mary's Counties — call or book online.",
   },
   {
     img: hero2,
-    badge: "Water Heater Experts — Same-Day Service",
-    line1: "No Hot Water?",
-    line2: "Fixed Today.",
-    sub: "From tank replacements to emergency repairs — our licensed techs arrive with the right parts. Upfront service, no surprises.",
+    flip: true,
+    badge: "Burst Pipe Emergency · Fast Dispatch",
+    line1: "Burst Pipe.",
+    line2: "We Answer the Call.",
+    sub: "A burst pipe floods fast. EPR screens every call, confirms urgency, and dispatches a licensed tech right away — day or night, across Southern Maryland.",
   },
   {
     img: hero3,
-    badge: "Emergency Plumbing — Available After Hours",
-    line1: "Burst Pipe.",
-    line2: "We Answer the Call.",
-    sub: "After-hours emergency plumbing across Southern Maryland. We screen every call, confirm urgency, and dispatch fast — day or night.",
+    flip: false,
+    badge: "Licensed Plumbers · No Drip Too Small",
+    line1: "Every Drip",
+    line2: "Costs You Money.",
+    sub: "A slow drip wastes thousands of gallons a year. From leaking faucets to hidden pipe leaks, EPR finds and fixes it right — the first time.",
   },
 ] as const;
 
@@ -80,7 +85,7 @@ function Index() {
   const [bookingOpen, setBookingOpen] = useState(false);
   return (
     <div className="min-h-screen bg-background text-charcoal">
-      <Header onBook={() => setBookingOpen(true)} />
+      <SiteHeader bookHref="#book-service" />
       <Hero onBook={() => setBookingOpen(true)} />
       <TrustBar />
       <BookingWidget />
@@ -91,62 +96,13 @@ function Index() {
       <GoogleReviews />
       <ServiceArea />
       <FinalCTA onBook={() => setBookingOpen(true)} />
-      <Footer />
+      <SiteFooter />
       <VoiceWidget />
       <AlexChat open={bookingOpen} onClose={() => setBookingOpen(false)} />
     </div>
   );
 }
 
-function Header({ onBook }: { onBook: () => void }) {
-  const [menuOpen, setMenuOpen] = useState(false);
-  const close = () => setMenuOpen(false);
-  return (
-    <header className="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-border">
-      <div className="max-w-7xl mx-auto px-5 lg:px-8 h-16 flex items-center justify-between">
-        <a href="#" className="flex items-center gap-2">
-          <div className="size-9 rounded-lg bg-turquoise flex items-center justify-center text-white font-bold text-sm">
-            EPR
-          </div>
-          <span className="font-display text-xl font-semibold text-charcoal">EPR Plumbing</span>
-        </a>
-
-        <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-charcoal/80">
-          <a href="#services" className="hover:text-turquoise transition">Services</a>
-          <a href="#book-service" className="hover:text-turquoise transition">Book</a>
-          <a href="#who" className="hover:text-turquoise transition">Who We Serve</a>
-          <a href="#area" className="hover:text-turquoise transition">Service Area</a>
-          <button onClick={() => window.dispatchEvent(new Event("open-voice-widget"))} className="hover:text-turquoise transition">
-            AI Assistant
-          </button>
-        </nav>
-
-        <div className="flex items-center gap-3">
-          <a href={`tel:${PHONE}`} className="hidden md:flex items-center gap-2 text-sm font-semibold text-charcoal hover:text-turquoise transition">
-            <Phone className="size-4 text-turquoise" /> {PHONE}
-          </a>
-          <button onClick={onBook} className="bg-turquoise text-white px-5 py-2.5 rounded-lg font-semibold text-sm hover:opacity-90 transition shadow-turquoise">
-            Book Now
-          </button>
-          <button onClick={() => setMenuOpen((o) => !o)} aria-label="Toggle menu"
-            className="md:hidden flex items-center justify-center size-9 rounded-lg border border-border text-charcoal hover:bg-secondary transition">
-            {menuOpen ? <X className="size-5" /> : <Menu className="size-5" />}
-          </button>
-        </div>
-      </div>
-
-      {menuOpen && (
-        <div className="md:hidden bg-white border-t border-border px-5 py-4 flex flex-col gap-4 text-sm font-medium text-charcoal/80">
-          <a href="#services" onClick={close} className="hover:text-turquoise transition">Services</a>
-          <a href="#book-service" onClick={close} className="hover:text-turquoise transition">Book a Service</a>
-          <a href="#who" onClick={close} className="hover:text-turquoise transition">Who We Serve</a>
-          <a href="#area" onClick={close} className="hover:text-turquoise transition">Service Area</a>
-          <a href={`tel:${PHONE}`} onClick={close} className="hover:text-turquoise transition">{PHONE}</a>
-        </div>
-      )}
-    </header>
-  );
-}
 
 function Hero({ onBook }: { onBook: () => void }) {
   const [slide, setSlide] = useState(0);
@@ -163,7 +119,7 @@ function Hero({ onBook }: { onBook: () => void }) {
     <section className="relative min-h-[92vh] flex items-center overflow-hidden">
       {HERO_SLIDES.map((s, i) => (
         <img key={i} src={s.img} alt=""
-          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${i === slide ? "opacity-100" : "opacity-0"}`}
+          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${i === slide ? "opacity-100" : "opacity-0"} ${s.flip ? "-scale-x-100" : ""}`}
         />
       ))}
       <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-transparent" />
@@ -636,36 +592,3 @@ function FinalCTA({ onBook }: { onBook: () => void }) {
   );
 }
 
-function Footer() {
-  return (
-    <footer className="bg-charcoal border-t border-white/10 text-white/80">
-      <div className="max-w-7xl mx-auto px-5 lg:px-8 py-14 grid md:grid-cols-3 gap-10">
-        <div>
-          <div className="flex items-center gap-2 mb-3">
-            <div className="size-9 rounded-lg bg-turquoise flex items-center justify-center text-white font-bold text-sm">EPR</div>
-            <span className="font-display text-xl font-semibold text-white">EPR Plumbing</span>
-          </div>
-          <p className="italic text-white/70">"Your Trusted Plumbing Partner."</p>
-          <p className="text-xs text-white/40 mt-2">{ADDRESS}</p>
-        </div>
-        <div>
-          <h4 className="text-white font-semibold mb-3 text-sm tracking-wider uppercase">Services</h4>
-          <ul className="space-y-2 text-sm">
-            {["Drain Cleaning", "Water Heater", "Pipe Repair", "Fixture Install", "Emergency Service", "Inspections"].map((l) => (
-              <li key={l}><a href="#services" className="hover:text-turquoise transition">{l}</a></li>
-            ))}
-          </ul>
-        </div>
-        <div>
-          <h4 className="text-white font-semibold mb-3 text-sm tracking-wider uppercase">Contact</h4>
-          <a href={`tel:${PHONE}`} className="text-sm flex items-center gap-2 mb-2 hover:text-turquoise transition"><Phone className="size-4 text-turquoise" /> {PHONE}</a>
-          <a href={`mailto:${EMAIL}`} className="text-sm flex items-center gap-2 hover:text-turquoise transition"><Mail className="size-4 text-turquoise" /> {EMAIL}</a>
-          <p className="text-xs text-white/40 mt-4">Licensed & Insured · Southern Maryland</p>
-        </div>
-      </div>
-      <div className="border-t border-white/10 py-5 text-center text-xs text-white/50">
-        © 2026 EPR Plumbing & Remodeling. All rights reserved. La Plata, MD.
-      </div>
-    </footer>
-  );
-}
