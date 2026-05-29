@@ -50,8 +50,8 @@
 
   --charcoal: oklch(0.22 0.09 248);           /* Navy Baltic Blue */
   --charcoal-soft: oklch(0.30 0.08 248);      /* Navy Baltic soft */
-  --turquoise: oklch(0.67 0.16 138);          /* Green #5FAD41 */
-  --turquoise-glow: oklch(0.75 0.13 138);     /* Green glow */
+  --turquoise: oklch(0.674 0.163 138);         /* #5FAD41 */
+  --turquoise-glow: oklch(0.75 0.13 138);     /* #5FAD41 glow */
 
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.24 0.005 240);
