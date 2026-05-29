@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { Phone, Mail } from "lucide-react";
+import { Phone, Mail, Droplets } from "lucide-react";
 import { SERVICE_NAV } from "./SiteHeader";
 
 const PHONE = "(240) 381-9035";
@@ -12,8 +12,8 @@ export function SiteFooter() {
       <div className="max-w-7xl mx-auto px-5 lg:px-8 py-14 grid md:grid-cols-3 gap-10">
         <div>
           <div className="flex items-center gap-2 mb-3">
-            <div className="size-9 rounded-lg bg-turquoise flex items-center justify-center text-white font-bold text-sm">EPR</div>
-            <span className="font-display text-xl font-semibold text-white">EPR Plumbing</span>
+            <div className="size-9 rounded-lg bg-turquoise flex items-center justify-center text-white"><Droplets className="size-5" /></div>
+            <span className="font-display text-xl font-semibold text-white">Plumbing</span>
           </div>
           <p className="italic text-white/70">"Your Trusted Plumbing Partner."</p>
           <p className="text-xs text-white/40 mt-2">{ADDRESS}</p>

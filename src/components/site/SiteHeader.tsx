@@ -39,8 +39,8 @@ export function SiteHeader({ bookHref = "/#book-service" }: { bookHref?: string 
     <header className="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-border">
       <div className="max-w-7xl mx-auto px-5 lg:px-8 h-16 flex items-center justify-between">
         <Link to="/" className="flex items-center gap-2">
-          <div className="size-9 rounded-lg bg-turquoise flex items-center justify-center text-white font-bold text-sm">EPR</div>
-          <span className="font-display text-xl font-semibold text-charcoal">EPR Plumbing</span>
+          <div className="size-9 rounded-lg bg-turquoise flex items-center justify-center text-white"><Droplets className="size-5" /></div>
+          <span className="font-display text-xl font-semibold text-charcoal">Plumbing</span>
         </Link>
 
         <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-charcoal/80">
