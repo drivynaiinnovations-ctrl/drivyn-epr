@@ -156,16 +156,6 @@ function Hero({ onBook }: { onBook: () => void }) {
             <Star className="size-5 fill-yellow-400 text-yellow-400" /> 5 Star Google Reviews
           </a>
         </div>
-        <div className="flex flex-col gap-2 pt-1">
-          <div className="flex items-center gap-2 text-xs text-white/50 w-full">
-            <ShieldCheck className="size-4 text-turquoise shrink-0" />
-            <span className="font-medium">Licensed & Insured</span>
-          </div>
-          <div className="flex items-center gap-2 text-xs text-white/50 w-full">
-            <CheckCircle2 className="size-4 text-turquoise shrink-0" />
-            <span className="font-medium">We Accept Most Forms of Payment</span>
-          </div>
-        </div>
       </section>
 
       {/* ── Desktop hero: full slideshow ── */}
