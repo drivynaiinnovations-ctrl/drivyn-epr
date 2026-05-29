@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import {
   Phone, Calendar, ShieldCheck, Clock, Home, Building2, Landmark,
   Wrench, Siren, CheckCircle2, ArrowRight, Mail, Droplets,
-  Gauge, Star, AlertTriangle, Zap, Award,
+  Gauge, Star, AlertTriangle, Zap, Award, MapPin,
 } from "lucide-react";
 import hero1 from "@/assets/hero-water-leak.jpg";
 import hero2 from "@/assets/hero-burst-pipe.jpg";
