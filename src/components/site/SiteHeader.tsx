@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { Link } from "@tanstack/react-router";
-import { Phone, Menu, X, ChevronDown, Droplets, Gauge, Wrench, Home, AlertTriangle, Zap, ShieldCheck, Siren } from "lucide-react";
+import { Phone, Menu, X, ChevronDown, Droplets, Gauge, Wrench, Home, AlertTriangle, Zap, ShieldCheck, Siren, MapPin } from "lucide-react";
 
 const PHONE = "(240) 381-9035";
 
@@ -17,23 +17,35 @@ export const SERVICE_NAV = [
   { label: "Inspections",           href: "/services/inspection-prevention", icon: ShieldCheck },
 ] as const;
 
+export const LOCATIONS_NAV = [
+  { label: "La Plata, MD",          href: "/locations/la-plata" },
+  { label: "Waldorf, MD",           href: "/locations/waldorf" },
+  { label: "Clinton, MD",           href: "/locations/clinton" },
+  { label: "Fort Washington, MD",   href: "/locations/fort-washington" },
+  { label: "Prince Frederick, MD",  href: "/locations/prince-frederick" },
+  { label: "Lexington Park, MD",    href: "/locations/lexington-park" },
+  { label: "Brandywine, MD",        href: "/locations/brandywine" },
+  { label: "Accokeek, MD",          href: "/locations/accokeek" },
+] as const;
+
 export function SiteHeader({ bookHref = "/#book-service" }: { bookHref?: string }) {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [servicesOpen, setServicesOpen] = useState(false);
+  const [openDropdown, setOpenDropdown] = useState<"services" | "locations" | null>(null);
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
-  const dropdownRef = useRef<HTMLDivElement>(null);
+  const [mobileLocationsOpen, setMobileLocationsOpen] = useState(false);
+  const navRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
-      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
-        setServicesOpen(false);
+      if (navRef.current && !navRef.current.contains(e.target as Node)) {
+        setOpenDropdown(null);
       }
     }
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  const close = () => { setMenuOpen(false); setMobileServicesOpen(false); };
+  const close = () => { setMenuOpen(false); setMobileServicesOpen(false); setMobileLocationsOpen(false); };
 
   return (
     <header className="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-border">
@@ -43,19 +55,19 @@ export function SiteHeader({ bookHref = "/#book-service" }: { bookHref?: string 
           <span className="font-display text-xl font-semibold text-charcoal">Plumbing</span>
         </Link>
 
-        <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-charcoal/80">
+        <nav ref={navRef} className="hidden md:flex items-center gap-8 text-sm font-medium text-charcoal/80">
           {/* Services dropdown */}
-          <div ref={dropdownRef} className="relative">
+          <div className="relative">
             <button
-              onClick={() => setServicesOpen((v) => !v)}
-              onMouseEnter={() => setServicesOpen(true)}
+              onClick={() => setOpenDropdown(openDropdown === "services" ? null : "services")}
+              onMouseEnter={() => setOpenDropdown("services")}
               className="flex items-center gap-1 hover:text-turquoise transition"
             >
-              Services <ChevronDown className={`size-3.5 transition-transform ${servicesOpen ? "rotate-180" : ""}`} />
+              Services <ChevronDown className={`size-3.5 transition-transform ${openDropdown === "services" ? "rotate-180" : ""}`} />
             </button>
-            {servicesOpen && (
+            {openDropdown === "services" && (
               <div
-                onMouseLeave={() => setServicesOpen(false)}
+                onMouseLeave={() => setOpenDropdown(null)}
                 className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-[420px] bg-white rounded-2xl border border-border shadow-luxe p-3 grid grid-cols-2 gap-1 z-50"
               >
                 {SERVICE_NAV.map((s) => {
@@ -64,8 +76,8 @@ export function SiteHeader({ bookHref = "/#book-service" }: { bookHref?: string 
                     <Link
                       key={s.href}
                       to={s.href}
-                      onClick={() => setServicesOpen(false)}
-                      className="flex items-center gap-2.5 px-3 py-2.5 rounded-xl hover:bg-turquoise/8 hover:text-turquoise text-charcoal/80 transition group"
+                      onClick={() => setOpenDropdown(null)}
+                      className="flex items-center gap-2.5 px-3 py-2.5 rounded-xl hover:bg-turquoise/10 hover:text-charcoal transition group"
                     >
                       <Icon className="size-4 text-turquoise shrink-0" />
                       <span className="text-sm font-medium">{s.label}</span>
@@ -75,12 +87,38 @@ export function SiteHeader({ bookHref = "/#book-service" }: { bookHref?: string 
               </div>
             )}
           </div>
-          <Link to="/#book-service" className="hover:text-turquoise transition">Book</Link>
+
+          {/* Locations dropdown */}
+          <div className="relative">
+            <button
+              onClick={() => setOpenDropdown(openDropdown === "locations" ? null : "locations")}
+              onMouseEnter={() => setOpenDropdown("locations")}
+              className="flex items-center gap-1 hover:text-turquoise transition"
+            >
+              Locations <ChevronDown className={`size-3.5 transition-transform ${openDropdown === "locations" ? "rotate-180" : ""}`} />
+            </button>
+            {openDropdown === "locations" && (
+              <div
+                onMouseLeave={() => setOpenDropdown(null)}
+                className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-64 bg-white rounded-2xl border border-border shadow-luxe p-3 flex flex-col gap-1 z-50"
+              >
+                {LOCATIONS_NAV.map((loc) => (
+                  <Link
+                    key={loc.href}
+                    to={loc.href}
+                    onClick={() => setOpenDropdown(null)}
+                    className="flex items-center gap-2.5 px-3 py-2.5 rounded-xl hover:bg-turquoise/10 hover:text-charcoal transition"
+                  >
+                    <MapPin className="size-4 text-turquoise shrink-0" />
+                    <span className="text-sm font-medium">{loc.label}</span>
+                  </Link>
+                ))}
+              </div>
+            )}
+          </div>
+
           <Link to="/#who" className="hover:text-turquoise transition">Who We Serve</Link>
           <Link to="/#area" className="hover:text-turquoise transition">Service Area</Link>
-          <button onClick={() => window.dispatchEvent(new Event("open-voice-widget"))} className="hover:text-turquoise transition">
-            AI Assistant
-          </button>
         </nav>
 
         <div className="flex items-center gap-3">
@@ -118,7 +156,26 @@ export function SiteHeader({ bookHref = "/#book-service" }: { bookHref?: string 
               ))}
             </div>
           )}
-          <Link to="/#book-service" onClick={close} className="py-2 hover:text-turquoise transition">Book a Service</Link>
+
+          {/* Locations accordion */}
+          <button
+            onClick={() => setMobileLocationsOpen((v) => !v)}
+            className="flex items-center justify-between w-full py-2 hover:text-turquoise transition"
+          >
+            <span>Locations</span>
+            <ChevronDown className={`size-4 transition-transform ${mobileLocationsOpen ? "rotate-180" : ""}`} />
+          </button>
+          {mobileLocationsOpen && (
+            <div className="pl-3 flex flex-col gap-1 mb-2">
+              {LOCATIONS_NAV.map((loc) => (
+                <Link key={loc.href} to={loc.href} onClick={close}
+                  className="py-1.5 text-sm text-charcoal/70 hover:text-turquoise transition">
+                  {loc.label}
+                </Link>
+              ))}
+            </div>
+          )}
+
           <Link to="/#who" onClick={close} className="py-2 hover:text-turquoise transition">Who We Serve</Link>
           <Link to="/#area" onClick={close} className="py-2 hover:text-turquoise transition">Service Area</Link>
           <a href={`tel:${PHONE}`} onClick={close} className="py-2 hover:text-turquoise transition">{PHONE}</a>

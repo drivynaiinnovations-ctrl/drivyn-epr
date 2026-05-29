@@ -50,8 +50,8 @@
 
   --charcoal: oklch(0.22 0.09 248);           /* Navy Baltic Blue */
   --charcoal-soft: oklch(0.30 0.08 248);      /* Navy Baltic soft */
-  --turquoise: oklch(0.72 0.21 152);          /* Spring Green */
-  --turquoise-glow: oklch(0.80 0.18 152);     /* Spring Green glow */
+  --turquoise: oklch(0.90 0.26 152);          /* Spring Green #37FF8B */
+  --turquoise-glow: oklch(0.93 0.18 152);     /* Spring Green glow */
 
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.24 0.005 240);
