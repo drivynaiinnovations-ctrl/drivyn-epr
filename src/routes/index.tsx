@@ -135,8 +135,8 @@ function Hero({ onBook }: { onBook: () => void }) {
       <section className="md:hidden bg-charcoal px-5 py-10 flex flex-col gap-5">
         <div>
           <p className="text-turquoise text-xs font-semibold tracking-[0.2em] uppercase mb-3">Southern Maryland · Licensed & Insured</p>
-          <h1 className="font-display text-3xl font-semibold text-white leading-tight mb-3">
-            Need a Plumber <span className="text-turquoise">Right Now?</span>
+          <h1 className="font-display font-black text-white leading-none mb-4" style={{ fontSize: "min(15.5vw, 5.5rem)" }}>
+            Need a Plumber<br /><span className="text-turquoise">Right Now?</span>
           </h1>
           <p className="text-white/70 text-base leading-relaxed">
             EPR Plumbing handles drain clogs, water heaters, leaks, and emergency calls — same day, guaranteed.
@@ -145,17 +145,16 @@ function Hero({ onBook }: { onBook: () => void }) {
         <div className="flex flex-col gap-3">
           <a href="#book-service"
             className="bg-turquoise text-white font-semibold px-6 py-4 rounded-xl text-base flex items-center justify-center gap-2 hover:opacity-90 shadow-turquoise transition">
-            <Calendar className="size-5" /> Book a Service
+            <Calendar className="size-5" /> Schedule Service Now!
           </a>
           <a href={`tel:${PHONE}`}
             className="border-2 border-white/30 text-white font-semibold px-6 py-4 rounded-xl flex items-center justify-center gap-2 hover:border-turquoise hover:text-turquoise transition">
-            <Phone className="size-5" /> Call {PHONE}
+            <Phone className="size-5" /> Call Us Now!
           </a>
-        </div>
-        <div className="flex flex-wrap gap-3 text-xs text-white/50">
-          <span className="flex items-center gap-1"><CheckCircle2 className="size-3.5 text-turquoise" /> Open 24 Hours</span>
-          <span className="flex items-center gap-1"><CheckCircle2 className="size-3.5 text-turquoise" /> No Hidden Fees</span>
-          <span className="flex items-center gap-1"><Award className="size-3.5 text-turquoise" /> Best of 2025</span>
+          <a href="https://www.google.com/search?q=EPR+Plumbing+%26+Remodeling+La+Plata+MD&hl=en#lrd=,1," target="_blank" rel="noopener noreferrer"
+            className="border-2 border-yellow-400/60 text-yellow-300 font-semibold px-6 py-4 rounded-xl flex items-center justify-center gap-2 hover:border-yellow-400 hover:text-yellow-400 transition">
+            <Star className="size-5 fill-yellow-400 text-yellow-400" /> 5 Star Google Reviews
+          </a>
         </div>
       </section>
 
