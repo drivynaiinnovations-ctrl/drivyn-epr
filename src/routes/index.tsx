@@ -130,57 +130,83 @@ function Hero({ onBook }: { onBook: () => void }) {
   const current = HERO_SLIDES[slide];
 
   return (
-    <section className="relative min-h-[92vh] flex items-start md:items-center overflow-hidden">
-      {HERO_SLIDES.map((s, i) => (
-        <img key={i} src={s.img} alt=""
-          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${i === slide ? "opacity-100" : "opacity-0"} ${s.flip ? "-scale-x-100" : ""}`}
-        />
-      ))}
-      {/* Mobile: bottom-up gradient so top 50% of image shows clearly */}
-      <div className="absolute inset-0 md:hidden bg-gradient-to-t from-black/90 via-black/50 to-transparent" />
-      {/* Desktop: left + bottom gradient */}
-      <div className="absolute inset-0 hidden md:block bg-gradient-to-r from-black/80 via-black/50 to-transparent" />
-      <div className="absolute inset-0 hidden md:block bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-
-      <div className="relative max-w-7xl mx-auto px-5 lg:px-8 pt-[50vh] pb-6 md:pt-0 md:py-24 w-full">
-        <div className="max-w-2xl">
-          <span className="hidden md:inline-flex items-center gap-2 text-turquoise text-xs font-semibold tracking-[0.2em] uppercase mb-6">
-            <span className="size-1.5 rounded-full bg-turquoise animate-pulse" />
-            {current.badge}
-          </span>
-          <h1 className="font-display text-4xl md:text-6xl font-semibold text-white leading-[1.05] mb-6">
-            {current.line1} <span className="text-turquoise">{current.line2}</span>
+    <>
+      {/* ── Mobile hero: clean CTA panel, no images ── */}
+      <section className="md:hidden bg-charcoal px-5 py-10 flex flex-col gap-5">
+        <div>
+          <p className="text-turquoise text-xs font-semibold tracking-[0.2em] uppercase mb-3">Southern Maryland · Licensed & Insured</p>
+          <h1 className="font-display text-3xl font-semibold text-white leading-tight mb-3">
+            Need a Plumber <span className="text-turquoise">Right Now?</span>
           </h1>
-          <p className="text-lg text-white/80 leading-relaxed mb-8 max-w-lg">{current.sub}</p>
-          <div className="flex flex-col sm:flex-row gap-4 mb-6">
-            <a href="#book-service"
-              className="group bg-turquoise text-white font-semibold px-7 py-4 rounded-xl text-base flex items-center justify-center gap-2 hover:opacity-90 shadow-turquoise transition">
-              <Calendar className="size-5" /> Book a Service
-              <ArrowRight className="size-4 group-hover:translate-x-1 transition" />
-            </a>
-            <a href={`tel:${PHONE}`}
-              className="pulse-ring relative bg-transparent border-2 border-white text-white font-semibold px-7 py-4 rounded-xl flex items-center justify-center gap-2 hover:bg-white hover:text-charcoal transition">
-              <Phone className="size-5 text-turquoise" />
-              <span className="md:hidden">Speak To Live Agent</span>
-              <span className="hidden md:inline">{PHONE}</span>
-            </a>
-          </div>
-          <div className="hidden md:flex flex-wrap gap-4 text-sm text-white/70">
-            <span className="flex items-center gap-1.5"><CheckCircle2 className="size-4 text-turquoise" /> Open 24 Hours</span>
-            <span className="flex items-center gap-1.5"><CheckCircle2 className="size-4 text-turquoise" /> Licensed & Insured</span>
-            <span className="flex items-center gap-1.5"><Award className="size-4 text-turquoise" /> Best of 2025</span>
-          </div>
+          <p className="text-white/70 text-base leading-relaxed">
+            EPR Plumbing handles drain clogs, water heaters, leaks, and emergency calls — same day, guaranteed.
+          </p>
         </div>
-      </div>
+        <div className="flex flex-col gap-3">
+          <a href="#book-service"
+            className="bg-turquoise text-white font-semibold px-6 py-4 rounded-xl text-base flex items-center justify-center gap-2 hover:opacity-90 shadow-turquoise transition">
+            <Calendar className="size-5" /> Book a Service
+          </a>
+          <a href={`tel:${PHONE}`}
+            className="border-2 border-white/30 text-white font-semibold px-6 py-4 rounded-xl flex items-center justify-center gap-2 hover:border-turquoise hover:text-turquoise transition">
+            <Phone className="size-5" /> Call {PHONE}
+          </a>
+        </div>
+        <div className="flex flex-wrap gap-3 text-xs text-white/50">
+          <span className="flex items-center gap-1"><CheckCircle2 className="size-3.5 text-turquoise" /> Open 24 Hours</span>
+          <span className="flex items-center gap-1"><CheckCircle2 className="size-3.5 text-turquoise" /> No Hidden Fees</span>
+          <span className="flex items-center gap-1"><Award className="size-3.5 text-turquoise" /> Best of 2025</span>
+        </div>
+      </section>
 
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2.5">
-        {HERO_SLIDES.map((_, i) => (
-          <button key={i} onClick={() => setSlide(i)}
-            className={`rounded-full transition-all duration-300 ${i === slide ? "w-8 h-2.5 bg-turquoise" : "w-2.5 h-2.5 bg-white/40 hover:bg-white/70"}`}
+      {/* ── Desktop hero: full slideshow ── */}
+      <section className="hidden md:flex relative min-h-[92vh] items-center overflow-hidden">
+        {HERO_SLIDES.map((s, i) => (
+          <img key={i} src={s.img} alt=""
+            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${i === slide ? "opacity-100" : "opacity-0"} ${s.flip ? "-scale-x-100" : ""}`}
           />
         ))}
-      </div>
-    </section>
+        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+
+        <div className="relative max-w-7xl mx-auto px-5 lg:px-8 py-24 w-full">
+          <div className="max-w-2xl">
+            <span className="inline-flex items-center gap-2 text-turquoise text-xs font-semibold tracking-[0.2em] uppercase mb-6">
+              <span className="size-1.5 rounded-full bg-turquoise animate-pulse" />
+              {current.badge}
+            </span>
+            <h1 className="font-display text-6xl font-semibold text-white leading-[1.05] mb-6">
+              {current.line1} <span className="text-turquoise">{current.line2}</span>
+            </h1>
+            <p className="text-lg text-white/80 leading-relaxed mb-8 max-w-lg">{current.sub}</p>
+            <div className="flex gap-4 mb-6">
+              <a href="#book-service"
+                className="group bg-turquoise text-white font-semibold px-7 py-4 rounded-xl text-base flex items-center gap-2 hover:opacity-90 shadow-turquoise transition">
+                <Calendar className="size-5" /> Book a Service
+                <ArrowRight className="size-4 group-hover:translate-x-1 transition" />
+              </a>
+              <a href={`tel:${PHONE}`}
+                className="pulse-ring relative bg-transparent border-2 border-white text-white font-semibold px-7 py-4 rounded-xl flex items-center gap-2 hover:bg-white hover:text-charcoal transition">
+                <Phone className="size-5 text-turquoise" /> {PHONE}
+              </a>
+            </div>
+            <div className="flex flex-wrap gap-4 text-sm text-white/70">
+              <span className="flex items-center gap-1.5"><CheckCircle2 className="size-4 text-turquoise" /> Open 24 Hours</span>
+              <span className="flex items-center gap-1.5"><CheckCircle2 className="size-4 text-turquoise" /> Licensed & Insured</span>
+              <span className="flex items-center gap-1.5"><Award className="size-4 text-turquoise" /> Best of 2025</span>
+            </div>
+          </div>
+        </div>
+
+        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2.5">
+          {HERO_SLIDES.map((_, i) => (
+            <button key={i} onClick={() => setSlide(i)}
+              className={`rounded-full transition-all duration-300 ${i === slide ? "w-8 h-2.5 bg-turquoise" : "w-2.5 h-2.5 bg-white/40 hover:bg-white/70"}`}
+            />
+          ))}
+        </div>
+      </section>
+    </>
   );
 }
 

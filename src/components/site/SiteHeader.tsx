@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { Link } from "@tanstack/react-router";
-import { Phone, Menu, X, ChevronDown, Droplets, Gauge, Wrench, Home, AlertTriangle, Zap, ShieldCheck, Siren, MapPin } from "lucide-react";
+import { Phone, Menu, X, ChevronDown, Droplets, Gauge, Wrench, Home, AlertTriangle, Zap, ShieldCheck, Siren, MapPin, CalendarDays } from "lucide-react";
 
 const PHONE = "(240) 381-9035";
 
@@ -125,22 +125,31 @@ export function SiteHeader({ bookHref = "/#book-service" }: { bookHref?: string 
             <Link to="/faq" className="hover:text-turquoise transition">FAQ</Link>
           </nav>
 
-          <div className="flex items-center gap-3">
-            <a href={`tel:${PHONE}`} className="hidden md:flex items-center gap-2 text-sm font-semibold text-charcoal hover:text-turquoise transition">
+          {/* Desktop actions */}
+          <div className="hidden md:flex items-center gap-3">
+            <a href={`tel:${PHONE}`} className="flex items-center gap-2 text-sm font-semibold text-charcoal hover:text-turquoise transition">
               <Phone className="size-4 text-turquoise" /> {PHONE}
             </a>
             <a href={bookHref} className="bg-turquoise text-white px-5 py-2.5 rounded-lg font-semibold text-sm hover:opacity-90 transition shadow-turquoise">
               Book Now
             </a>
           </div>
-        </div>
 
-        {/* Mobile: hamburger toggle sits below the main row, right-aligned */}
-        <div className="md:hidden flex justify-end pb-2">
-          <button onClick={() => setMenuOpen((o) => !o)} aria-label="Toggle menu"
-            className="flex items-center justify-center size-9 rounded-lg border border-border text-charcoal hover:bg-secondary transition">
-            {menuOpen ? <X className="size-5" /> : <Menu className="size-5" />}
-          </button>
+          {/* Mobile icon buttons */}
+          <div className="md:hidden flex items-center gap-2">
+            <a href={bookHref} aria-label="Book service"
+              className="flex items-center justify-center size-10 rounded-lg bg-turquoise text-white hover:opacity-90 transition">
+              <CalendarDays className="size-5" />
+            </a>
+            <a href={`tel:${PHONE}`} aria-label="Call us"
+              className="flex items-center justify-center size-10 rounded-lg bg-charcoal text-white hover:opacity-90 transition">
+              <Phone className="size-5" />
+            </a>
+            <button onClick={() => setMenuOpen((o) => !o)} aria-label="Toggle menu"
+              className="flex items-center justify-center size-10 rounded-lg border border-border text-charcoal hover:bg-secondary transition">
+              {menuOpen ? <X className="size-5" /> : <Menu className="size-5" />}
+            </button>
+          </div>
         </div>
       </div>
 
