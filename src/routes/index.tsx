@@ -5,7 +5,7 @@ import {
   Wrench, Siren, CheckCircle2, ArrowRight, Mail, Droplets,
   Gauge, Star, AlertTriangle, Zap, Award,
 } from "lucide-react";
-import hero1 from "@/assets/plumber-fixing-toilet-washroom.jpg";
+import hero1 from "@/assets/hero-water-leak.jpg";
 import hero2 from "@/assets/hero-burst-pipe.jpg";
 import hero3 from "@/assets/hero-new3.jpg";
 import { VoiceWidget } from "@/components/site/VoiceWidget";
@@ -72,7 +72,7 @@ const SERVICES = [
 
 const TIME_SLOTS = [
   { key: "3pm-6pm",   label: "3pm – 6pm",  sub: "Emergency rate applies", emergency: true },
-  { key: "after-6pm", label: "After 6pm",  sub: "Emergency rate applies", emergency: true },
+  { key: "after-9pm", label: "After 9pm",  sub: "Emergency rate applies", emergency: true },
 ] as const;
 
 const REVIEWS = [
@@ -118,18 +118,21 @@ function Hero({ onBook }: { onBook: () => void }) {
   const current = HERO_SLIDES[slide];
 
   return (
-    <section className="relative min-h-[92vh] flex items-center overflow-hidden">
+    <section className="relative min-h-[92vh] flex items-end md:items-center overflow-hidden">
       {HERO_SLIDES.map((s, i) => (
         <img key={i} src={s.img} alt=""
           className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${i === slide ? "opacity-100" : "opacity-0"} ${s.flip ? "-scale-x-100" : ""}`}
         />
       ))}
-      <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-transparent" />
-      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+      {/* Mobile: bottom-up gradient so top 50% of image shows clearly */}
+      <div className="absolute inset-0 md:hidden bg-gradient-to-t from-black/90 via-black/50 to-transparent" />
+      {/* Desktop: left + bottom gradient */}
+      <div className="absolute inset-0 hidden md:block bg-gradient-to-r from-black/80 via-black/50 to-transparent" />
+      <div className="absolute inset-0 hidden md:block bg-gradient-to-t from-black/60 via-transparent to-transparent" />
 
-      <div className="relative max-w-7xl mx-auto px-5 lg:px-8 py-24 w-full">
+      <div className="relative max-w-7xl mx-auto px-5 lg:px-8 pt-6 pb-20 md:py-24 w-full">
         <div className="max-w-2xl">
-          <span className="inline-flex items-center gap-2 text-turquoise text-xs font-semibold tracking-[0.2em] uppercase mb-6">
+          <span className="inline-flex items-center gap-2 text-turquoise text-xs font-semibold tracking-[0.2em] uppercase mb-3 md:mb-6">
             <span className="size-1.5 rounded-full bg-turquoise animate-pulse" />
             {current.badge}
           </span>
