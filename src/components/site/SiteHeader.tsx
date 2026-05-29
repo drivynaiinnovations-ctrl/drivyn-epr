@@ -51,87 +51,94 @@ export function SiteHeader({ bookHref = "/#book-service" }: { bookHref?: string 
 
   return (
     <header className="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-border">
-      <div className="max-w-7xl mx-auto px-5 lg:px-8 h-16 flex items-center justify-between">
-        <Link to="/" className="flex items-center gap-2">
-          <div className="size-9 rounded-lg bg-turquoise flex items-center justify-center text-white"><Droplets className="size-5" /></div>
-          <span className="font-display text-xl font-semibold text-charcoal">EPR Plumbing</span>
-        </Link>
+      <div className="max-w-7xl mx-auto px-5 lg:px-8">
+        {/* Main row — logo + nav + actions */}
+        <div className="h-16 flex items-center justify-between">
+          <Link to="/" className="flex items-center gap-2">
+            <div className="size-9 rounded-lg bg-turquoise flex items-center justify-center text-white"><Droplets className="size-5" /></div>
+            <span className="font-display text-xl font-semibold text-charcoal">EPR Plumbing</span>
+          </Link>
 
-        <nav ref={navRef} className="hidden md:flex items-center gap-8 text-sm font-medium text-charcoal/80">
-          {/* Services dropdown */}
-          <div className="relative">
-            <button
-              onClick={() => setOpenDropdown(openDropdown === "services" ? null : "services")}
-              onMouseEnter={() => setOpenDropdown("services")}
-              className="flex items-center gap-1 hover:text-turquoise transition"
-            >
-              Services <ChevronDown className={`size-3.5 transition-transform ${openDropdown === "services" ? "rotate-180" : ""}`} />
-            </button>
-            {openDropdown === "services" && (
-              <div
-                onMouseLeave={() => setOpenDropdown(null)}
-                className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-[420px] bg-white rounded-2xl border border-border shadow-luxe p-3 grid grid-cols-2 gap-1 z-50"
+          <nav ref={navRef} className="hidden md:flex items-center gap-8 text-sm font-medium text-charcoal/80">
+            {/* Services dropdown */}
+            <div className="relative">
+              <button
+                onClick={() => setOpenDropdown(openDropdown === "services" ? null : "services")}
+                onMouseEnter={() => setOpenDropdown("services")}
+                className="flex items-center gap-1 hover:text-turquoise transition"
               >
-                {SERVICE_NAV.map((s) => {
-                  const Icon = s.icon;
-                  return (
+                Services <ChevronDown className={`size-3.5 transition-transform ${openDropdown === "services" ? "rotate-180" : ""}`} />
+              </button>
+              {openDropdown === "services" && (
+                <div
+                  onMouseLeave={() => setOpenDropdown(null)}
+                  className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-[420px] bg-white rounded-2xl border border-border shadow-luxe p-3 grid grid-cols-2 gap-1 z-50"
+                >
+                  {SERVICE_NAV.map((s) => {
+                    const Icon = s.icon;
+                    return (
+                      <Link
+                        key={s.href}
+                        to={s.href}
+                        onClick={() => setOpenDropdown(null)}
+                        className="flex items-center gap-2.5 px-3 py-2.5 rounded-xl hover:bg-turquoise/10 hover:text-charcoal transition group"
+                      >
+                        <Icon className="size-4 text-turquoise shrink-0" />
+                        <span className="text-sm font-medium">{s.label}</span>
+                      </Link>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
+
+            {/* Locations dropdown */}
+            <div className="relative">
+              <button
+                onClick={() => setOpenDropdown(openDropdown === "locations" ? null : "locations")}
+                onMouseEnter={() => setOpenDropdown("locations")}
+                className="flex items-center gap-1 hover:text-turquoise transition"
+              >
+                Locations <ChevronDown className={`size-3.5 transition-transform ${openDropdown === "locations" ? "rotate-180" : ""}`} />
+              </button>
+              {openDropdown === "locations" && (
+                <div
+                  onMouseLeave={() => setOpenDropdown(null)}
+                  className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-64 bg-white rounded-2xl border border-border shadow-luxe p-3 flex flex-col gap-1 z-50"
+                >
+                  {LOCATIONS_NAV.map((loc) => (
                     <Link
-                      key={s.href}
-                      to={s.href}
+                      key={loc.href}
+                      to={loc.href}
                       onClick={() => setOpenDropdown(null)}
-                      className="flex items-center gap-2.5 px-3 py-2.5 rounded-xl hover:bg-turquoise/10 hover:text-charcoal transition group"
+                      className="flex items-center gap-2.5 px-3 py-2.5 rounded-xl hover:bg-turquoise/10 hover:text-charcoal transition"
                     >
-                      <Icon className="size-4 text-turquoise shrink-0" />
-                      <span className="text-sm font-medium">{s.label}</span>
+                      <MapPin className="size-4 text-turquoise shrink-0" />
+                      <span className="text-sm font-medium">{loc.label}</span>
                     </Link>
-                  );
-                })}
-              </div>
-            )}
+                  ))}
+                </div>
+              )}
+            </div>
+
+            <Link to="/#who" className="hover:text-turquoise transition">Who We Serve</Link>
+            <Link to="/faq" className="hover:text-turquoise transition">FAQ</Link>
+          </nav>
+
+          <div className="flex items-center gap-3">
+            <a href={`tel:${PHONE}`} className="hidden md:flex items-center gap-2 text-sm font-semibold text-charcoal hover:text-turquoise transition">
+              <Phone className="size-4 text-turquoise" /> {PHONE}
+            </a>
+            <a href={bookHref} className="bg-turquoise text-white px-5 py-2.5 rounded-lg font-semibold text-sm hover:opacity-90 transition shadow-turquoise">
+              Book Now
+            </a>
           </div>
+        </div>
 
-          {/* Locations dropdown */}
-          <div className="relative">
-            <button
-              onClick={() => setOpenDropdown(openDropdown === "locations" ? null : "locations")}
-              onMouseEnter={() => setOpenDropdown("locations")}
-              className="flex items-center gap-1 hover:text-turquoise transition"
-            >
-              Locations <ChevronDown className={`size-3.5 transition-transform ${openDropdown === "locations" ? "rotate-180" : ""}`} />
-            </button>
-            {openDropdown === "locations" && (
-              <div
-                onMouseLeave={() => setOpenDropdown(null)}
-                className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-64 bg-white rounded-2xl border border-border shadow-luxe p-3 flex flex-col gap-1 z-50"
-              >
-                {LOCATIONS_NAV.map((loc) => (
-                  <Link
-                    key={loc.href}
-                    to={loc.href}
-                    onClick={() => setOpenDropdown(null)}
-                    className="flex items-center gap-2.5 px-3 py-2.5 rounded-xl hover:bg-turquoise/10 hover:text-charcoal transition"
-                  >
-                    <MapPin className="size-4 text-turquoise shrink-0" />
-                    <span className="text-sm font-medium">{loc.label}</span>
-                  </Link>
-                ))}
-              </div>
-            )}
-          </div>
-
-          <Link to="/#who" className="hover:text-turquoise transition">Who We Serve</Link>
-          <Link to="/faq" className="hover:text-turquoise transition">FAQ</Link>
-        </nav>
-
-        <div className="flex items-center gap-3">
-          <a href={`tel:${PHONE}`} className="hidden md:flex items-center gap-2 text-sm font-semibold text-charcoal hover:text-turquoise transition">
-            <Phone className="size-4 text-turquoise" /> {PHONE}
-          </a>
-          <a href={bookHref} className="bg-turquoise text-white px-5 py-2.5 rounded-lg font-semibold text-sm hover:opacity-90 transition shadow-turquoise">
-            Book Now
-          </a>
+        {/* Mobile: hamburger toggle sits below the main row, right-aligned */}
+        <div className="md:hidden flex justify-end pb-2">
           <button onClick={() => setMenuOpen((o) => !o)} aria-label="Toggle menu"
-            className="md:hidden flex items-center justify-center size-9 rounded-lg border border-border text-charcoal hover:bg-secondary transition">
+            className="flex items-center justify-center size-9 rounded-lg border border-border text-charcoal hover:bg-secondary transition">
             {menuOpen ? <X className="size-5" /> : <Menu className="size-5" />}
           </button>
         </div>
