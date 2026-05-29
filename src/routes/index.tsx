@@ -5,7 +5,7 @@ import {
   Wrench, Siren, CheckCircle2, ArrowRight, Mail, Droplets,
   Gauge, Star, AlertTriangle, Zap,
 } from "lucide-react";
-import hero1 from "@/assets/hero-water-leak.jpg";
+import hero1 from "@/assets/home-drainage-inspection.webp";
 import hero2 from "@/assets/hero-burst-pipe.jpg";
 import hero3 from "@/assets/hero-new3.jpg";
 import { VoiceWidget } from "@/components/site/VoiceWidget";
@@ -36,10 +36,10 @@ const HERO_SLIDES = [
   {
     img: hero1,
     flip: false,
-    badge: "24/7 Emergency Plumbing · Southern Maryland",
-    line1: "Water on Your Floor?",
-    line2: "Stop the Damage Now.",
-    sub: "Every minute a leak runs, the damage grows. EPR Plumbing dispatches fast across Charles, Prince George's, Calvert & St. Mary's Counties — call or book online.",
+    badge: "Home Drain Inspection · Southern Maryland",
+    line1: "Hidden Drain Problems",
+    line2: "We Find Them Fast.",
+    sub: "Most drain failures start slow and go undetected. EPR's licensed technicians inspect your home's full drainage system before small issues become expensive disasters.",
   },
   {
     img: hero2,
