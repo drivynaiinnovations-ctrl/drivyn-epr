@@ -1,4 +1,4 @@
-import { X, PhoneCall } from "lucide-react";
+﻿import { X, PhoneCall } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { chatWithAlex } from "@/lib/chatWithAlex";
 import { startVapi } from "@/lib/vapi";
@@ -6,7 +6,7 @@ import { startVapi } from "@/lib/vapi";
 type Role = "alex" | "user";
 interface Msg { role: Role; text: string }
 
-const OPENING = "Hi! I'm Alex, EPR Plumbing's virtual assistant. I can answer questions about our services, pricing, and availability — or connect you with a live plumber. What can I help you with?";
+const OPENING = "Hi! I'm Alex, EPR Plumbing's virtual assistant. I can answer questions about our services, pricing, and availability â€” or connect you with a live plumber. What can I help you with?";
 
 export function AlexChat({ open, onClose }: { open: boolean; onClose: () => void }) {
   const [messages, setMessages] = useState<Msg[]>([]);
@@ -52,7 +52,7 @@ export function AlexChat({ open, onClose }: { open: boolean; onClose: () => void
       if (sid) setSessionId(sid);
       setMessages((m) => [...m, { role: "alex", text: reply }]);
     } catch {
-      setMessages((m) => [...m, { role: "alex", text: "Sorry, something went wrong. Please call us at (240) 381-9035." }]);
+      setMessages((m) => [...m, { role: "alex", text: "Sorry, something went wrong. Please call us at (605) 815-1039." }]);
     } finally {
       setLoading(false);
     }
@@ -80,7 +80,7 @@ export function AlexChat({ open, onClose }: { open: boolean; onClose: () => void
           <div className="flex items-center gap-3">
             <div className="size-9 rounded-full bg-turquoise flex items-center justify-center text-white font-bold text-sm">A</div>
             <div>
-              <p className="font-semibold text-charcoal text-sm leading-tight">Alex · EPR Plumbing</p>
+              <p className="font-semibold text-charcoal text-sm leading-tight">Alex Â· EPR Plumbing</p>
               <p className="text-xs text-turquoise flex items-center gap-1">
                 <span className="size-1.5 rounded-full bg-turquoise animate-pulse inline-block" /> Online now
               </p>
@@ -128,7 +128,7 @@ export function AlexChat({ open, onClose }: { open: boolean; onClose: () => void
             value={input}
             onChange={(e) => setInput(e.target.value)}
             disabled={loading}
-            placeholder="Ask a plumbing question…"
+            placeholder="Ask a plumbing questionâ€¦"
             className="flex-1 border border-border rounded-lg px-3 py-2 text-sm text-charcoal placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-turquoise/40 focus:border-turquoise transition disabled:opacity-50"
           />
           <button

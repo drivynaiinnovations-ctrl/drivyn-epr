@@ -1,8 +1,8 @@
-import { useState, useRef, useEffect } from "react";
+﻿import { useState, useRef, useEffect } from "react";
 import { Link } from "@tanstack/react-router";
 import { Phone, Menu, X, ChevronDown, Droplets, Gauge, Wrench, Home, AlertTriangle, Zap, ShieldCheck, Siren, MapPin, CalendarDays } from "lucide-react";
 
-const PHONE = "(240) 381-9035";
+const PHONE = "(605) 815-1039";
 
 export const SERVICE_NAV = [
   { label: "Drain Cleaning",        href: "/services/drain-cleaning",        icon: Droplets },
@@ -52,7 +52,7 @@ export function SiteHeader({ bookHref = "/#book-service" }: { bookHref?: string 
   return (
     <header className="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-border">
       <div className="max-w-7xl mx-auto px-5 lg:px-8">
-        {/* Main row — logo + nav + actions */}
+        {/* Main row â€” logo + nav + actions */}
         <div className="h-16 flex items-center justify-between">
           <Link to="/" className="flex items-center gap-2">
             <div className="size-9 rounded-lg bg-turquoise flex items-center justify-center text-white"><Droplets className="size-5" /></div>

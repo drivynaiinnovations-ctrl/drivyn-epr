@@ -1,4 +1,4 @@
-import { Headset, PhoneOff, X } from "lucide-react";
+﻿import { Headset, PhoneOff, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { startVapi, stopVapi, onVapiEvent, offVapiEvent, VAPI_ASSISTANT_ID } from "@/lib/vapi";
 
@@ -81,7 +81,7 @@ export function VoiceWidget() {
       </button>
       {!open && (
         <span className="hidden sm:block text-xs text-charcoal bg-white/95 backdrop-blur px-3 py-1.5 rounded-full shadow border border-border">
-          {isActive ? "Call in progress..." : "Speak With A Live Agent Now — 24/7"}
+          {isActive ? "Call in progress..." : "Speak With A Live Agent Now â€” 24/7"}
         </span>
       )}
     </div>

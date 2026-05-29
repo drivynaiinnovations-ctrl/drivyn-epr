@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+﻿import { useEffect, useRef, useState } from "react";
 import { X, Phone } from "lucide-react";
 import { startVapi, VAPI_ASSISTANT_ID } from "@/lib/vapi";
 
@@ -8,7 +8,7 @@ const SCRIPT: Line[] = [
   { who: "AI", text: "Hi, this is ABC HVAC. How can I help you today?" },
   { who: "You", text: "My heat just stopped working and it's freezing." },
   { who: "AI", text: "I'm sorry to hear that. I'm marking this as an emergency. Can I confirm your address and dispatch a technician now?" },
-  { who: "You", text: "Yes — 123 Elm St, Bethesda." },
+  { who: "You", text: "Yes â€” 123 Elm St, Bethesda." },
   { who: "AI", text: "Done. Technician Marcus will arrive within 45 minutes. You'll get an SMS confirmation in a moment." },
 ];
 
@@ -94,7 +94,7 @@ export function DemoModal({ open, onClose }: { open: boolean; onClose: () => voi
           <div className="flex items-center gap-3">
             <span className="size-2.5 rounded-full bg-turquoise animate-pulse" />
             <div>
-              <p className="font-display text-lg font-semibold text-charcoal leading-tight">ABC HVAC — AI Assistant Demo</p>
+              <p className="font-display text-lg font-semibold text-charcoal leading-tight">ABC HVAC â€” AI Assistant Demo</p>
               <p className="text-xs text-muted-foreground">Live conversation simulation</p>
             </div>
           </div>
@@ -122,7 +122,7 @@ export function DemoModal({ open, onClose }: { open: boolean; onClose: () => voi
 
         <div className={`px-6 py-5 border-t border-border transition-opacity duration-500 ${finished ? "opacity-100" : "opacity-40 pointer-events-none"}`}>
           <p className="text-center text-xs font-semibold tracking-[0.18em] uppercase text-turquoise mb-3">
-            This is a demo — experience the real thing
+            This is a demo â€” experience the real thing
           </p>
           <button
             onClick={() => {
@@ -131,7 +131,7 @@ export function DemoModal({ open, onClose }: { open: boolean; onClose: () => voi
             }}
             className="w-full bg-turquoise text-white font-semibold rounded-xl py-4 text-base inline-flex items-center justify-center gap-2 hover:opacity-90 shadow-turquoise transition"
           >
-            <Phone className="size-5" /> Talk to Alex Now — Try the Live AI
+            <Phone className="size-5" /> Talk to Alex Now â€” Try the Live AI
           </button>
         </div>
       </div>

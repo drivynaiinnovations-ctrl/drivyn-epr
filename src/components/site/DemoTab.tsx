@@ -1,4 +1,4 @@
-import { MessageSquare, X } from "lucide-react";
+﻿import { MessageSquare, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { startVapi, VAPI_ASSISTANT_ID } from "@/lib/vapi";
 
@@ -22,7 +22,7 @@ export function DemoTab() {
         onClick={() => setOpen(true)}
         className="hidden lg:flex fixed left-0 top-1/2 -translate-y-1/2 z-40 bg-turquoise text-white px-3 py-5 rounded-r-xl shadow-turquoise items-center gap-2 [writing-mode:vertical-rl] rotate-180 font-semibold tracking-wide text-sm hover:px-4 transition-all"
       >
-        See How Our AI Works — Try Demo
+        See How Our AI Works â€” Try Demo
       </button>
 
       {open && (
@@ -39,7 +39,7 @@ export function DemoTab() {
               <Bubble who="AI">Hi, this is ABC HVAC. How can I help you today?</Bubble>
               <Bubble who="You">My heat just stopped working and it's freezing.</Bubble>
               <Bubble who="AI">I'm sorry to hear that. I'm marking this as an emergency. Can I confirm your address and dispatch a technician now?</Bubble>
-              <Bubble who="You">Yes — 123 Elm St, Bethesda.</Bubble>
+              <Bubble who="You">Yes â€” 123 Elm St, Bethesda.</Bubble>
               <Bubble who="AI">Done. Technician Marcus will arrive within 45 minutes. You'll get an SMS confirmation in a moment.</Bubble>
             </div>
             <button
