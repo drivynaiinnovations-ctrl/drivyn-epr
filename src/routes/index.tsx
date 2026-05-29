@@ -118,7 +118,7 @@ function Hero({ onBook }: { onBook: () => void }) {
   const current = HERO_SLIDES[slide];
 
   return (
-    <section className="relative min-h-[92vh] flex items-end md:items-center overflow-hidden">
+    <section className="relative min-h-[92vh] flex items-start md:items-center overflow-hidden">
       {HERO_SLIDES.map((s, i) => (
         <img key={i} src={s.img} alt=""
           className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${i === slide ? "opacity-100" : "opacity-0"} ${s.flip ? "-scale-x-100" : ""}`}
@@ -130,7 +130,7 @@ function Hero({ onBook }: { onBook: () => void }) {
       <div className="absolute inset-0 hidden md:block bg-gradient-to-r from-black/80 via-black/50 to-transparent" />
       <div className="absolute inset-0 hidden md:block bg-gradient-to-t from-black/60 via-transparent to-transparent" />
 
-      <div className="relative max-w-7xl mx-auto px-5 lg:px-8 pt-6 pb-20 md:py-24 w-full">
+      <div className="relative max-w-7xl mx-auto px-5 lg:px-8 pt-[50vh] pb-6 md:pt-0 md:py-24 w-full">
         <div className="max-w-2xl">
           <span className="hidden md:inline-flex items-center gap-2 text-turquoise text-xs font-semibold tracking-[0.2em] uppercase mb-6">
             <span className="size-1.5 rounded-full bg-turquoise animate-pulse" />
