@@ -5,7 +5,7 @@ import {
   Wrench, Siren, CheckCircle2, ArrowRight, Mail, Droplets,
   Gauge, Star, AlertTriangle, Zap, Award,
 } from "lucide-react";
-import hero1 from "@/assets/home-drainage-inspection.webp";
+import hero1 from "@/assets/plumber-fixing-toilet-washroom.jpg";
 import hero2 from "@/assets/hero-burst-pipe.jpg";
 import hero3 from "@/assets/hero-new3.jpg";
 import { VoiceWidget } from "@/components/site/VoiceWidget";

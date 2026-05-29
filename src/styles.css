@@ -50,8 +50,8 @@
 
   --charcoal: oklch(0.22 0.09 248);           /* Navy Baltic Blue */
   --charcoal-soft: oklch(0.30 0.08 248);      /* Navy Baltic soft */
-  --turquoise: oklch(0.90 0.26 152);          /* Spring Green #37FF8B */
-  --turquoise-glow: oklch(0.93 0.18 152);     /* Spring Green glow */
+  --turquoise: oklch(0.67 0.16 138);          /* Green #5FAD41 */
+  --turquoise-glow: oklch(0.75 0.13 138);     /* Green glow */
 
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.24 0.005 240);
@@ -64,7 +64,7 @@
   --secondary-foreground: var(--charcoal);
   --muted: oklch(0.97 0.01 258);
   --muted-foreground: oklch(0.48 0.005 240);
-  --accent: oklch(0.95 0.05 152);
+  --accent: oklch(0.95 0.05 142);
   --accent-foreground: var(--charcoal);
   --destructive: oklch(0.6 0.22 25);
   --destructive-foreground: oklch(1 0 0);

@@ -120,7 +120,7 @@ export function SiteHeader({ bookHref = "/#book-service" }: { bookHref?: string 
           </div>
 
           <Link to="/#who" className="hover:text-turquoise transition">Who We Serve</Link>
-          <Link to="/#area" className="hover:text-turquoise transition">Service Area</Link>
+          <Link to="/faq" className="hover:text-turquoise transition">FAQ</Link>
         </nav>
 
         <div className="flex items-center gap-3">
@@ -179,7 +179,7 @@ export function SiteHeader({ bookHref = "/#book-service" }: { bookHref?: string 
           )}
 
           <Link to="/#who" onClick={close} className="py-2 hover:text-turquoise transition">Who We Serve</Link>
-          <Link to="/#area" onClick={close} className="py-2 hover:text-turquoise transition">Service Area</Link>
+          <Link to="/faq" onClick={close} className="py-2 hover:text-turquoise transition">FAQ</Link>
           <a href={`tel:${PHONE}`} onClick={close} className="py-2 hover:text-turquoise transition">{PHONE}</a>
         </div>
       )}
