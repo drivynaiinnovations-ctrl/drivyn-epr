@@ -5,9 +5,9 @@ import {
   Wrench, Siren, CheckCircle2, ArrowRight, Mail, Droplets,
   Gauge, Star, AlertTriangle, Zap, Award, MapPin,
 } from "lucide-react";
-import hero1 from "@/assets/hero-new1.jpg";
-import hero2 from "@/assets/hero-new1.jpg";
-import hero3 from "@/assets/hero-new1.jpg";
+import hero1 from "@/assets/damaged-pipe-with-leaking.jpg";
+import hero2 from "@/assets/is-your-toilet-leaking.jpg";
+import hero3 from "@/assets/plumber-fixing-toilet-washroom.jpg";
 import { VoiceWidget } from "@/components/site/VoiceWidget";
 import { AlexChat } from "@/components/site/AlexChat";
 import { Reveal } from "@/components/site/Reveal";
