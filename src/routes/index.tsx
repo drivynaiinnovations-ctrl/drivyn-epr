@@ -71,7 +71,7 @@ const SERVICES = [
 ] as const;
 
 const TIME_SLOTS = [
-  { key: "3pm-6pm",   label: "3pm – 6pm",  sub: "Standard window",  emergency: false },
+  { key: "3pm-6pm",   label: "3pm – 6pm",  sub: "Emergency rate applies", emergency: true },
   { key: "after-6pm", label: "After 6pm",  sub: "Emergency rate applies", emergency: true },
 ] as const;
 
@@ -207,12 +207,12 @@ function BookingWidget() {
                 Book Your Service <br />in Seconds.
               </h2>
               <p className="text-lg text-muted-foreground leading-relaxed mb-6">
-                Select your service, pick a time window, and we'll handle the rest. Standard window runs 3pm–6pm. Need us after 6pm? That's our emergency window — same crew, same quality, higher rate.
+                Select your service, pick a time window, and we'll handle the rest. Both windows carry our emergency rate — same crew, same quality, priority dispatch.
               </p>
               <ul className="space-y-3">
                 {[
-                  "3pm – 6pm: standard afternoon window (Mon–Sat)",
-                  "After 6pm: emergency window — higher rate applies",
+                  "3pm – 6pm: emergency rate applies",
+                  "After 6pm: emergency rate applies",
                   "SMS & email confirmation sent instantly",
                   "Toilet leaks flagged for priority dispatch",
                 ].map((item) => (
