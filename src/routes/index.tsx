@@ -6,7 +6,7 @@ import {
   Gauge, Star, AlertTriangle, Zap, Award, MapPin,
 } from "lucide-react";
 import hero1 from "@/assets/hero-water-leak.jpg";
-import hero2 from "@/assets/hero-burst-pipe.jpg";
+import hero2 from "@/assets/hero-water-leak.jpg";
 import hero3 from "@/assets/hero-new3.jpg";
 import { VoiceWidget } from "@/components/site/VoiceWidget";
 import { AlexChat } from "@/components/site/AlexChat";
