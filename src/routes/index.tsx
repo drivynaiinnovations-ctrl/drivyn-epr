@@ -80,8 +80,11 @@ const SERVICES = [
 ] as const;
 
 const TIME_SLOTS = [
-  { key: "3pm-6pm",   label: "3pm – 6pm",  sub: "Emergency rate applies", emergency: true },
-  { key: "after-9pm", label: "After 9pm",  sub: "Emergency rate applies", emergency: true },
+  { key: "9am-11am",  label: "9am – 11am",  sub: "Standard rate",          emergency: false },
+  { key: "11am-1pm",  label: "11am – 1pm",  sub: "Standard rate",          emergency: false },
+  { key: "1pm-3pm",   label: "1pm – 3pm",   sub: "Standard rate",          emergency: false },
+  { key: "3pm-6pm",   label: "3pm – 6pm",   sub: "Emergency rate applies", emergency: true  },
+  { key: "after-7pm", label: "After 7pm",   sub: "Emergency rate applies", emergency: true  },
 ] as const;
 
 const REVIEWS = [
@@ -205,7 +208,7 @@ function TrustBar() {
 
 function BookingWidget() {
   const [selected, setSelected] = useState<string>("drain");
-  const [timeSlot, setTimeSlot] = useState<string>("3pm-6pm");
+  const [timeSlot, setTimeSlot] = useState<string>("9am-11am");
 
   const isToilet = selected === "toilet";
   const isEmergency = TIME_SLOTS.find((s) => s.key === timeSlot)?.emergency ?? false;
@@ -221,12 +224,12 @@ function BookingWidget() {
                 Book Your Service <br />in Seconds.
               </h2>
               <p className="text-lg text-muted-foreground leading-relaxed mb-6">
-                Select your service, pick a time window, and we'll handle the rest. Both windows carry our emergency rate — same crew, same quality, priority dispatch.
+                Select your service, pick a time window, and we'll handle the rest. Standard slots run 9am–3pm. After 3pm and evening slots are emergency rate — same licensed crew, priority dispatch.
               </p>
               <ul className="hidden md:block space-y-3">
                 {[
-                  "3pm – 6pm: emergency rate applies",
-                  "After 9pm: emergency rate applies",
+                  "9am – 11am, 11am – 1pm, 1pm – 3pm: standard rate",
+                  "3pm – 6pm & After 7pm: emergency rate applies",
                   "SMS & email confirmation sent instantly",
                   "Toilet leaks flagged for priority dispatch",
                 ].map((item) => (
@@ -293,23 +296,28 @@ function BookingWidget() {
 
               {/* Appointment time picker */}
               <p className="text-xs font-semibold text-charcoal/60 uppercase tracking-wider mb-3">Appointment Time</p>
-              <div className="grid grid-cols-2 gap-3 mb-5">
-                {TIME_SLOTS.map((slot) => (
-                  <button key={slot.key} onClick={() => setTimeSlot(slot.key)}
-                    className={`flex flex-col items-center py-4 rounded-xl border-2 font-semibold transition ${
-                      timeSlot === slot.key
-                        ? slot.emergency
-                          ? "border-charcoal bg-charcoal text-white"
-                          : "border-turquoise bg-turquoise/10 text-turquoise"
-                        : slot.emergency
-                          ? "border-charcoal/30 text-charcoal hover:border-charcoal hover:bg-charcoal/5"
-                          : "border-gray-200 text-charcoal hover:border-turquoise/50 hover:bg-turquoise/5"
-                    }`}>
-                    {slot.emergency && <Siren className="size-4 mb-1" />}
-                    <span className="text-sm">{slot.label}</span>
-                    <span className="text-[10px] font-normal mt-0.5 opacity-70">{slot.sub}</span>
-                  </button>
-                ))}
+              <div className="relative mb-5">
+                <select
+                  value={timeSlot}
+                  onChange={(e) => setTimeSlot(e.target.value)}
+                  className={`w-full appearance-none rounded-xl border-2 px-4 py-3 pr-10 text-sm font-semibold focus:outline-none transition cursor-pointer ${
+                    isEmergency
+                      ? "border-charcoal bg-charcoal text-white"
+                      : "border-turquoise bg-turquoise/10 text-turquoise"
+                  }`}
+                >
+                  {TIME_SLOTS.map((slot) => (
+                    <option key={slot.key} value={slot.key} className="bg-white text-charcoal font-normal">
+                      {slot.label} — {slot.sub}
+                    </option>
+                  ))}
+                </select>
+                <div className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2">
+                  {isEmergency
+                    ? <Siren className="size-4 text-white" />
+                    : <Clock className="size-4 text-turquoise" />
+                  }
+                </div>
               </div>
 
               {isEmergency && (
