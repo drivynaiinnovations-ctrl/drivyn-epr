@@ -148,7 +148,9 @@ function Hero({ onBook }: { onBook: () => void }) {
             </a>
             <a href={`tel:${PHONE}`}
               className="pulse-ring relative bg-transparent border-2 border-white text-white font-semibold px-7 py-4 rounded-xl flex items-center justify-center gap-2 hover:bg-white hover:text-charcoal transition">
-              <Phone className="size-5 text-turquoise" /> {PHONE}
+              <Phone className="size-5 text-turquoise" />
+              <span className="md:hidden">Speak To Live Agent</span>
+              <span className="hidden md:inline">{PHONE}</span>
             </a>
           </div>
           <div className="flex flex-wrap gap-4 text-sm text-white/70">
@@ -212,10 +214,10 @@ function BookingWidget() {
               <p className="text-lg text-muted-foreground leading-relaxed mb-6">
                 Select your service, pick a time window, and we'll handle the rest. Both windows carry our emergency rate — same crew, same quality, priority dispatch.
               </p>
-              <ul className="space-y-3">
+              <ul className="hidden md:block space-y-3">
                 {[
                   "3pm – 6pm: emergency rate applies",
-                  "After 6pm: emergency rate applies",
+                  "After 9pm: emergency rate applies",
                   "SMS & email confirmation sent instantly",
                   "Toilet leaks flagged for priority dispatch",
                 ].map((item) => (
@@ -573,7 +575,9 @@ function FinalCTA({ onBook }: { onBook: () => void }) {
               <Calendar className="size-5" /> Book My Appointment
             </a>
             <a href={`tel:${PHONE}`} className="pulse-ring relative bg-transparent border-2 border-white text-white font-semibold px-8 py-4 rounded-xl inline-flex items-center justify-center gap-2 hover:bg-white hover:text-charcoal transition">
-              <Phone className="size-5" /> {PHONE}
+              <Phone className="size-5" />
+              <span className="md:hidden">Speak To Live Agent</span>
+              <span className="hidden md:inline">{PHONE}</span>
             </a>
           </div>
           <div className="text-white/80 space-y-1">
