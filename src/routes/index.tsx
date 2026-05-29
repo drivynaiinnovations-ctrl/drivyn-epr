@@ -1,9 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState, useEffect } from "react";
 import {
-  Phone, Calendar, ShieldCheck, MapPin, Clock, Home, Building2, Landmark,
+  Phone, Calendar, ShieldCheck, Clock, Home, Building2, Landmark,
   Wrench, Siren, CheckCircle2, ArrowRight, Mail, Droplets,
-  Gauge, Star, AlertTriangle, Zap,
+  Gauge, Star, AlertTriangle, Zap, Award,
 } from "lucide-react";
 import hero1 from "@/assets/home-drainage-inspection.webp";
 import hero2 from "@/assets/hero-burst-pipe.jpg";
@@ -149,7 +149,7 @@ function Hero({ onBook }: { onBook: () => void }) {
           <div className="flex flex-wrap gap-4 text-sm text-white/70">
             <span className="flex items-center gap-1.5"><CheckCircle2 className="size-4 text-turquoise" /> Open 24 Hours</span>
             <span className="flex items-center gap-1.5"><CheckCircle2 className="size-4 text-turquoise" /> Licensed & Insured</span>
-            <span className="flex items-center gap-1.5"><CheckCircle2 className="size-4 text-turquoise" /> Southern Maryland</span>
+            <span className="flex items-center gap-1.5"><Award className="size-4 text-turquoise" /> Best of 2025</span>
           </div>
         </div>
       </div>
@@ -168,7 +168,7 @@ function Hero({ onBook }: { onBook: () => void }) {
 function TrustBar() {
   const items = [
     { icon: ShieldCheck, label: "Licensed & Insured" },
-    { icon: MapPin, label: "Southern Maryland" },
+    { icon: Award, label: "Best of 2025" },
     { icon: Clock, label: "Open 24 Hours" },
     { icon: Star, label: "5★ Rated on Google" },
     { icon: CheckCircle2, label: "No Hidden Fees" },
