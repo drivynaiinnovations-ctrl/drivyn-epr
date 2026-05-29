@@ -1,117 +1,67 @@
-import { X } from "lucide-react";
+import { X, PhoneCall } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import { classifyIssue } from "@/lib/classify";
+import { chatWithAlex } from "@/lib/chatWithAlex";
 import { startVapi } from "@/lib/vapi";
 
 type Role = "alex" | "user";
-type Step = "name" | "phone" | "issue" | "classifying" | "done";
-
 interface Msg { role: Role; text: string }
 
-const ALEX_DELAY = 900; // ms before Alex "responds"
+const OPENING = "Hi! I'm Alex, EPR Plumbing's virtual assistant. I can answer questions about our services, pricing, and availability — or connect you with a live plumber. What can I help you with?";
 
 export function AlexChat({ open, onClose }: { open: boolean; onClose: () => void }) {
-  const [step, setStep] = useState<Step>("name");
   const [messages, setMessages] = useState<Msg[]>([]);
   const [input, setInput] = useState("");
-  const [typing, setTyping] = useState(false);
-  const [name, setName] = useState("");
-  const [phone, setPhone] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [sessionId, setSessionId] = useState<string | null>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  // Reset and greet when opened
   useEffect(() => {
     if (!open) return;
-    setStep("name");
-    setMessages([]);
+    setMessages([{ role: "alex", text: OPENING }]);
     setInput("");
-    setName("");
-    setPhone("");
-    setTyping(false);
-
-    const t = setTimeout(() => {
-      setMessages([{ role: "alex", text: "Hi! I'm Alex, ABC HVAC's virtual assistant. Let's get you taken care of. What's your name?" }]);
-      setTimeout(() => inputRef.current?.focus(), 50);
-    }, 300);
+    setSessionId(null);
+    setLoading(false);
+    setTimeout(() => inputRef.current?.focus(), 50);
 
     const onKey = (e: KeyboardEvent) => e.key === "Escape" && onClose();
     document.addEventListener("keydown", onKey);
     document.body.style.overflow = "hidden";
-
     return () => {
-      clearTimeout(t);
       document.removeEventListener("keydown", onKey);
       document.body.style.overflow = "";
     };
   }, [open, onClose]);
 
-  // Scroll to bottom on new message
   useEffect(() => {
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" });
-  }, [messages, typing]);
+  }, [messages, loading]);
 
   if (!open) return null;
-
-  function addUser(text: string) {
-    setMessages((m) => [...m, { role: "user", text }]);
-  }
-
-  function alexSay(text: string, then?: () => void) {
-    setTyping(true);
-    setTimeout(() => {
-      setTyping(false);
-      setMessages((m) => [...m, { role: "alex", text }]);
-      if (then) setTimeout(then, 50);
-    }, ALEX_DELAY);
-  }
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     const val = input.trim();
-    if (!val) return;
+    if (!val || loading) return;
     setInput("");
+    setMessages((m) => [...m, { role: "user", text: val }]);
+    setLoading(true);
 
-    if (step === "name") {
-      addUser(val);
-      setName(val);
-      setStep("phone");
-      alexSay(`Nice to meet you, ${val.split(" ")[0]}! What's the best phone number to reach you?`);
-    } else if (step === "phone") {
-      addUser(val);
-      setPhone(val);
-      setStep("issue");
-      alexSay("Got it! What's going on with your HVAC system?");
-    } else if (step === "issue") {
-      addUser(val);
-      setStep("classifying");
-      alexSay("Thanks — let me check on that for you…", async () => {
-        try {
-          const { urgent } = await classifyIssue({ data: { issue: val } });
-          if (urgent) {
-            alexSay(
-              "It sounds like you need to speak with one of our expert technicians right away to discuss the details. I'm connecting you now.",
-              () => {
-                setStep("done");
-                onClose();
-                startVapi();
-              }
-            );
-          } else {
-            alexSay(
-              `Got it! I've noted your information and one of our team members will follow up at ${phone} to schedule your appointment. Is there anything else you need?`,
-              () => setStep("done")
-            );
-          }
-        } catch {
-          alexSay("Sorry, something went wrong. Please call us directly at (301) 555-1234.");
-          setStep("done");
-        }
-      });
+    try {
+      const { reply, sessionId: sid } = await chatWithAlex({ data: { message: val, sessionId: sessionId ?? undefined } });
+      if (sid) setSessionId(sid);
+      setMessages((m) => [...m, { role: "alex", text: reply }]);
+    } catch {
+      setMessages((m) => [...m, { role: "alex", text: "Sorry, something went wrong. Please call us at (240) 381-9035." }]);
+    } finally {
+      setLoading(false);
     }
   }
 
-  const isDone = step === "done" || step === "classifying";
+  function handleVoice() {
+    onClose();
+    startVapi();
+  }
 
   return (
     <div
@@ -123,14 +73,14 @@ export function AlexChat({ open, onClose }: { open: boolean; onClose: () => void
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="relative bg-white w-full sm:max-w-md rounded-t-2xl sm:rounded-2xl shadow-luxe overflow-hidden animate-in slide-in-from-bottom-4 sm:zoom-in-95"
+        className="relative bg-white w-full sm:max-w-md rounded-t-2xl sm:rounded-2xl shadow-luxe overflow-hidden animate-in slide-in-from-bottom-4 sm:zoom-in-95 flex flex-col max-h-[85vh]"
       >
         {/* Header */}
-        <div className="px-5 py-4 border-b border-border flex items-center justify-between">
+        <div className="px-5 py-4 border-b border-border flex items-center justify-between shrink-0">
           <div className="flex items-center gap-3">
             <div className="size-9 rounded-full bg-turquoise flex items-center justify-center text-white font-bold text-sm">A</div>
             <div>
-              <p className="font-semibold text-charcoal text-sm leading-tight">Alex · ABC HVAC</p>
+              <p className="font-semibold text-charcoal text-sm leading-tight">Alex · EPR Plumbing</p>
               <p className="text-xs text-turquoise flex items-center gap-1">
                 <span className="size-1.5 rounded-full bg-turquoise animate-pulse inline-block" /> Online now
               </p>
@@ -142,15 +92,15 @@ export function AlexChat({ open, onClose }: { open: boolean; onClose: () => void
         </div>
 
         {/* Messages */}
-        <div ref={scrollRef} className="px-4 py-4 space-y-3 max-h-72 overflow-y-auto bg-secondary/20">
+        <div ref={scrollRef} className="px-4 py-4 space-y-3 overflow-y-auto flex-1 bg-secondary/20">
           {messages.map((m, i) => (
             <div key={i} className={`flex ${m.role === "user" ? "justify-end" : "justify-start"}`}>
-              <div className={`max-w-[80%] px-4 py-2.5 rounded-2xl text-sm leading-relaxed ${m.role === "user" ? "bg-turquoise text-white rounded-br-sm" : "bg-white text-charcoal border border-border rounded-bl-sm shadow-sm"}`}>
+              <div className={`max-w-[82%] px-4 py-2.5 rounded-2xl text-sm leading-relaxed ${m.role === "user" ? "bg-turquoise text-white rounded-br-sm" : "bg-white text-charcoal border border-border rounded-bl-sm shadow-sm"}`}>
                 {m.text}
               </div>
             </div>
           ))}
-          {typing && (
+          {loading && (
             <div className="flex justify-start">
               <div className="bg-white border border-border rounded-2xl rounded-bl-sm px-4 py-3 shadow-sm flex gap-1 items-center">
                 {[0, 1, 2].map((i) => (
@@ -161,23 +111,29 @@ export function AlexChat({ open, onClose }: { open: boolean; onClose: () => void
           )}
         </div>
 
+        {/* Voice escalation */}
+        <div className="px-4 pt-2 shrink-0">
+          <button
+            onClick={handleVoice}
+            className="w-full flex items-center justify-center gap-2 text-xs text-charcoal/60 hover:text-turquoise transition py-1.5"
+          >
+            <PhoneCall className="size-3.5" /> Speak with a live plumber instead
+          </button>
+        </div>
+
         {/* Input */}
-        <form onSubmit={handleSubmit} className="px-4 py-3 border-t border-border flex gap-2">
+        <form onSubmit={handleSubmit} className="px-4 py-3 border-t border-border flex gap-2 shrink-0">
           <input
             ref={inputRef}
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            disabled={isDone || typing}
-            placeholder={
-              step === "name" ? "Your full name…" :
-              step === "phone" ? "Phone number…" :
-              step === "issue" ? "Describe the issue…" : ""
-            }
+            disabled={loading}
+            placeholder="Ask a plumbing question…"
             className="flex-1 border border-border rounded-lg px-3 py-2 text-sm text-charcoal placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-turquoise/40 focus:border-turquoise transition disabled:opacity-50"
           />
           <button
             type="submit"
-            disabled={!input.trim() || isDone || typing}
+            disabled={!input.trim() || loading}
             className="bg-turquoise text-white text-sm font-semibold px-4 py-2 rounded-lg hover:opacity-90 transition disabled:opacity-40"
           >
             Send

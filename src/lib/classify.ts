@@ -16,7 +16,7 @@ export const classifyIssue = createServerFn({ method: "POST" })
       messages: [
         {
           role: "user",
-          content: `You are an HVAC dispatcher. Classify the following customer issue as either EMERGENCY or ROUTINE. Reply with one word only.\n\nIssue: ${data.issue}`,
+          content: `You are a plumbing dispatcher for EPR Plumbing & Remodeling in Southern Maryland. Classify the following customer issue as either EMERGENCY or ROUTINE. Emergencies include burst pipes, sewage backups, active flooding, gas leaks, no hot water, and overflowing toilets. Reply with one word only.\n\nIssue: ${data.issue}`,
         },
       ],
     });

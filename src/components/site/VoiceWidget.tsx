@@ -52,7 +52,7 @@ export function VoiceWidget() {
             </button>
           </div>
           <p className="text-sm text-charcoal/80 mb-3">
-            "Hi, this is ABC HVAC. How can I help you today?"
+            "Hi, this is EPR Plumbing. How can I help you today?"
           </p>
           {isActive ? (
             <button
