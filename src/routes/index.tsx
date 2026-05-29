@@ -2,18 +2,15 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useState, useEffect } from "react";
 import {
   Phone, Calendar, ShieldCheck, MapPin, Clock, Home, Building2, Landmark,
-  Wrench, Siren, Mic, CheckCircle2, ArrowRight, Mail, Menu, X, Droplets,
+  Wrench, Siren, CheckCircle2, ArrowRight, Mail, Menu, X, Droplets,
   Gauge, Star, AlertTriangle, Zap,
 } from "lucide-react";
-import hero1 from "@/assets/hero-1.jpg";
-import hero2 from "@/assets/hero-2.jpg";
-import hero3 from "@/assets/hero-3.jpg";
+import hero1 from "@/assets/hero-new1.jpg";
+import hero2 from "@/assets/hero-new2.jpg";
+import hero3 from "@/assets/hero-new3.jpg";
 import { VoiceWidget } from "@/components/site/VoiceWidget";
-import { DemoTab } from "@/components/site/DemoTab";
-import { DemoModal } from "@/components/site/DemoModal";
 import { AlexChat } from "@/components/site/AlexChat";
 import { Reveal } from "@/components/site/Reveal";
-import { startVapi, VAPI_ASSISTANT_ID } from "@/lib/vapi";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -68,6 +65,16 @@ const SERVICES = [
   { key: "disposal", label: "Garbage Disposal", icon: Wrench, priority: false },
 ] as const;
 
+const STANDARD_SLOTS = ["9am", "11am", "1pm"];
+const EMERGENCY_SLOTS = ["3pm", "5pm", "7pm", "9pm"];
+
+const REVIEWS = [
+  { name: "James T.", location: "Waldorf, MD", rating: 5, text: "EPR came out same day for a burst pipe under my sink. Tech was professional, explained everything, and the price was fair. Couldn't ask for better service." },
+  { name: "Maria L.", location: "La Plata, MD", rating: 5, text: "Called them at 7pm when my water heater quit. They had someone out by 9pm and it was replaced the next morning. Life savers. Will definitely use again." },
+  { name: "Derrick H.", location: "Clinton, MD", rating: 5, text: "Had a stubborn drain clog that two other plumbers couldn't fix. EPR's tech came in, hydro-jetted the line, and it's been clear for months. Highly recommend." },
+  { name: "Sandra W.", location: "Prince Frederick, MD", rating: 5, text: "These guys are the real deal. On time, no hidden fees, and they cleaned up after themselves. My bathroom fixture install looks perfect. 5 stars." },
+];
+
 // ── Main page ─────────────────────────────────────────────────────────────────
 function Index() {
   const [bookingOpen, setBookingOpen] = useState(false);
@@ -81,12 +88,11 @@ function Index() {
       <Services />
       <EmergencyProtocol />
       <HowItWorks />
-      <AISection />
+      <GoogleReviews />
       <ServiceArea />
       <FinalCTA onBook={() => setBookingOpen(true)} />
       <Footer />
       <VoiceWidget />
-      <DemoTab />
       <AlexChat open={bookingOpen} onClose={() => setBookingOpen(false)} />
     </div>
   );
@@ -160,8 +166,8 @@ function Hero({ onBook }: { onBook: () => void }) {
           className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${i === slide ? "opacity-100" : "opacity-0"}`}
         />
       ))}
-      <div className="absolute inset-0 bg-gradient-to-r from-charcoal/95 via-charcoal/85 to-charcoal/40" />
-      <div className="absolute inset-0 bg-gradient-to-t from-charcoal/80 via-transparent to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
 
       <div className="relative max-w-7xl mx-auto px-5 lg:px-8 py-24 w-full">
         <div className="max-w-2xl">
@@ -227,10 +233,10 @@ function TrustBar() {
 
 function BookingWidget() {
   const [selected, setSelected] = useState<string>("drain");
-  const [isEmergency, setIsEmergency] = useState(false);
+  const [timeSlot, setTimeSlot] = useState<string>("9am");
 
-  const service = SERVICES.find((s) => s.key === selected)!;
   const isToilet = selected === "toilet";
+  const isEmergency = EMERGENCY_SLOTS.includes(timeSlot);
 
   return (
     <section id="book-service" className="py-20 bg-secondary/40 scroll-mt-16">
@@ -248,7 +254,7 @@ function BookingWidget() {
               <ul className="space-y-3">
                 {[
                   "Standard slots: 9am, 11am, 1pm (Mon–Sat)",
-                  "Emergency slots: 3pm, 5pm, 7pm, 9pm",
+                  "Emergency slots: 3pm, 5pm, 7pm, 9pm (higher rate applies)",
                   "SMS & email confirmation sent instantly",
                   "Toilet leaks flagged for priority dispatch",
                 ].map((item) => (
@@ -276,7 +282,7 @@ function BookingWidget() {
 
               {/* Service selection */}
               <p className="text-xs font-semibold text-charcoal/60 uppercase tracking-wider mb-3">Select Service</p>
-              <div className="grid grid-cols-2 gap-2 mb-5">
+              <div className="grid grid-cols-2 gap-2 mb-4">
                 {SERVICES.slice(0, 4).map((s) => {
                   const Icon = s.icon;
                   return (
@@ -313,22 +319,41 @@ function BookingWidget() {
                 </div>
               )}
 
-              {/* Emergency toggle */}
-              <div className="flex items-center justify-between bg-secondary/60 rounded-xl px-4 py-3 mb-5 cursor-pointer"
-                onClick={() => setIsEmergency((v) => !v)}>
-                <div>
-                  <p className="text-sm font-semibold text-charcoal">Is this an emergency?</p>
-                  <p className="text-xs text-muted-foreground">After 3pm · after-hours · urgent issue</p>
-                </div>
-                <div className={`w-10 h-6 rounded-full transition-colors flex items-center px-0.5 ${isEmergency ? "bg-turquoise" : "bg-gray-200"}`}>
-                  <div className={`size-5 bg-white rounded-full shadow transition-transform ${isEmergency ? "translate-x-4" : "translate-x-0"}`} />
-                </div>
+              {/* Appointment time picker */}
+              <p className="text-xs font-semibold text-charcoal/60 uppercase tracking-wider mb-2">Appointment Time</p>
+              <p className="text-[10px] text-charcoal/50 mb-2">Standard slots (Mon–Sat)</p>
+              <div className="grid grid-cols-3 gap-2 mb-3">
+                {STANDARD_SLOTS.map((slot) => (
+                  <button key={slot} onClick={() => setTimeSlot(slot)}
+                    className={`py-2 rounded-xl border text-sm font-medium transition ${
+                      timeSlot === slot
+                        ? "border-turquoise bg-turquoise/10 text-turquoise"
+                        : "border-gray-200 text-charcoal hover:border-turquoise/50 hover:bg-turquoise/5"
+                    }`}>
+                    {slot}
+                  </button>
+                ))}
+              </div>
+              <p className="text-[10px] text-amber-600 font-semibold mb-2 flex items-center gap-1">
+                <Siren className="size-3" /> Emergency slots — after-hours
+              </p>
+              <div className="grid grid-cols-4 gap-1.5 mb-5">
+                {EMERGENCY_SLOTS.map((slot) => (
+                  <button key={slot} onClick={() => setTimeSlot(slot)}
+                    className={`py-2 rounded-xl border text-xs font-semibold transition ${
+                      timeSlot === slot
+                        ? "border-amber-500 bg-amber-50 text-amber-700"
+                        : "border-amber-200 text-amber-600 hover:border-amber-400 hover:bg-amber-50"
+                    }`}>
+                    ⚡ {slot}
+                  </button>
+                ))}
               </div>
 
               {isEmergency && (
                 <div className="flex items-start gap-2 bg-amber-50 border border-amber-200 rounded-xl px-3 py-2.5 mb-4 text-xs text-charcoal/80">
                   <Siren className="size-4 text-amber-500 shrink-0 mt-0.5" />
-                  <span>We'll screen your request, confirm the emergency, and dispatch right away. You'll receive SMS & email confirmation.</span>
+                  <span><strong className="text-amber-600">Emergency rate applies</strong> — higher fee for after-hours service. We'll screen your request, confirm urgency, and dispatch fast. SMS & email confirmation sent instantly.</span>
                 </div>
               )}
 
@@ -519,67 +544,43 @@ function HowItWorks() {
   );
 }
 
-function AISection() {
-  const [demoOpen, setDemoOpen] = useState(false);
-  const features = [
-    { icon: Mic, title: "AI Voice Agent", body: "Answers every call instantly. Handles plumbing questions, books appointments, and routes emergencies to a live tech." },
-    { icon: Calendar, title: "Smart Scheduling", body: "Standard or emergency slots filled automatically. SMS and email confirmations sent the moment a booking is made." },
-    { icon: CheckCircle2, title: "Manager Alerts", body: "Every after-hours emergency forwards a full job summary and location to the EPR night-duty manager automatically." },
-  ];
+function GoogleReviews() {
   return (
-    <section id="ai" className="py-24 bg-secondary/40 scroll-mt-16">
+    <section className="py-24 bg-secondary/40">
       <div className="max-w-7xl mx-auto px-5 lg:px-8">
-        <SectionHeader kicker="Powered by AI — Built for Plumbers" title="Every call answered. Every job booked."
-          sub="EPR's AI assistant knows plumbing inside and out — answers questions, screens emergencies, and books your slot without putting you on hold." />
-
-        <div className="grid md:grid-cols-3 gap-6 mb-16">
-          {features.map((f, i) => (
-            <Reveal key={f.title} delay={i * 100}>
-              <div className="p-7 rounded-2xl bg-white hover:border-turquoise/40 border border-transparent hover:border transition">
-                <f.icon className="size-9 text-turquoise mb-4" />
-                <h3 className="font-display text-xl font-semibold text-charcoal mb-2">{f.title}</h3>
-                <p className="text-muted-foreground">{f.body}</p>
+        <SectionHeader kicker="Google Reviews · 5★ Rated" title="What Southern Maryland Says About Us"
+          sub="Trusted by homeowners, businesses, and facilities across Charles, Prince George's, Calvert & St. Mary's Counties." />
+        <div className="grid md:grid-cols-2 gap-6">
+          {REVIEWS.map((r, i) => (
+            <Reveal key={r.name} delay={i * 80}>
+              <div className="bg-white rounded-2xl p-7 border border-border hover:border-turquoise/30 transition hover:shadow-luxe">
+                <div className="flex items-center gap-1 mb-4">
+                  {Array.from({ length: r.rating }).map((_, j) => (
+                    <Star key={j} className="size-4 text-amber-400 fill-amber-400" />
+                  ))}
+                  <span className="ml-2 text-xs text-muted-foreground font-medium">Google Review</span>
+                </div>
+                <p className="text-charcoal/85 leading-relaxed mb-5">"{r.text}"</p>
+                <div className="flex items-center gap-3">
+                  <div className="size-10 rounded-full bg-turquoise/10 flex items-center justify-center text-turquoise font-bold text-sm">
+                    {r.name[0]}
+                  </div>
+                  <div>
+                    <p className="text-sm font-semibold text-charcoal">{r.name}</p>
+                    <p className="text-xs text-muted-foreground flex items-center gap-1">
+                      <MapPin className="size-3" /> {r.location}
+                    </p>
+                  </div>
+                </div>
               </div>
             </Reveal>
           ))}
         </div>
-
         <Reveal>
-          <div className="rounded-3xl bg-gradient-to-br from-charcoal to-charcoal-soft p-1 shadow-luxe">
-            <div className="bg-charcoal rounded-[22px] p-8 md:p-12 grid md:grid-cols-2 gap-10 items-center">
-              <div>
-                <p className="text-turquoise text-xs font-semibold tracking-[0.2em] uppercase mb-3">Live Demo</p>
-                <h3 className="font-display text-3xl md:text-4xl font-semibold text-white mb-4">Try EPR's AI Plumbing Assistant</h3>
-                <p className="text-white/70 mb-6">Sample: customer reports a toilet leak → AI flags priority → books same-day slot → confirms by SMS in under 60 seconds.</p>
-                <button onClick={() => setDemoOpen(true)}
-                  className="bg-turquoise text-white font-semibold px-6 py-3.5 rounded-xl inline-flex items-center gap-2 hover:opacity-90 transition shadow-turquoise">
-                  <Mic className="size-5" /> Launch Interactive Demo
-                </button>
-              </div>
-              <div className="bg-white rounded-2xl p-5 space-y-3 text-sm shadow-luxe">
-                <DemoBubble who="AI">Hi, this is EPR Plumbing. What's going on today?</DemoBubble>
-                <DemoBubble who="You">My toilet is leaking at the base and there's water on the floor.</DemoBubble>
-                <DemoBubble who="AI">Got it — toilet leaks are priority for us. Can I get your address so I can dispatch right away?</DemoBubble>
-                <DemoBubble who="You">8 Main St, La Plata.</DemoBubble>
-                <DemoBubble who="AI">Booked — a tech is heading your way. Confirmation sent to your phone and email.</DemoBubble>
-              </div>
-            </div>
-          </div>
+          <p className="text-center text-sm text-muted-foreground mt-8">Verified reviews from Google · EPR Plumbing & Remodeling</p>
         </Reveal>
       </div>
-      <DemoModal open={demoOpen} onClose={() => setDemoOpen(false)} />
     </section>
-  );
-}
-
-function DemoBubble({ who, children }: { who: "AI" | "You"; children: React.ReactNode }) {
-  const isAI = who === "AI";
-  return (
-    <div className={`flex ${isAI ? "justify-start" : "justify-end"}`}>
-      <div className={`max-w-[85%] px-4 py-2 rounded-2xl ${isAI ? "bg-secondary text-charcoal rounded-bl-sm" : "bg-turquoise text-white rounded-br-sm"}`}>
-        {children}
-      </div>
-    </div>
   );
 }
 
