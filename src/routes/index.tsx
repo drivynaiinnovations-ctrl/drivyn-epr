@@ -70,8 +70,10 @@ const SERVICES = [
   { key: "disposal", label: "Garbage Disposal", icon: Wrench, priority: false },
 ] as const;
 
-const STANDARD_SLOTS = ["9am", "11am", "1pm"];
-const EMERGENCY_SLOTS = ["3pm", "5pm", "7pm", "9pm"];
+const TIME_SLOTS = [
+  { key: "3pm-6pm",   label: "3pm – 6pm",  sub: "Standard window",  emergency: false },
+  { key: "after-6pm", label: "After 6pm",  sub: "Emergency rate applies", emergency: true },
+] as const;
 
 const REVIEWS = [
   { name: "James T.", location: "Waldorf, MD", rating: 5, text: "EPR came out same day for a burst pipe under my sink. Tech was professional, explained everything, and the price was fair. Couldn't ask for better service." },
@@ -189,10 +191,10 @@ function TrustBar() {
 
 function BookingWidget() {
   const [selected, setSelected] = useState<string>("drain");
-  const [timeSlot, setTimeSlot] = useState<string>("9am");
+  const [timeSlot, setTimeSlot] = useState<string>("3pm-6pm");
 
   const isToilet = selected === "toilet";
-  const isEmergency = EMERGENCY_SLOTS.includes(timeSlot);
+  const isEmergency = TIME_SLOTS.find((s) => s.key === timeSlot)?.emergency ?? false;
 
   return (
     <section id="book-service" className="py-20 bg-secondary/40 scroll-mt-16">
@@ -205,12 +207,12 @@ function BookingWidget() {
                 Book Your Service <br />in Seconds.
               </h2>
               <p className="text-lg text-muted-foreground leading-relaxed mb-6">
-                Select your service, choose a time, and we'll handle the rest. Standard appointments run 9am–1pm in 2-hour slots. Need us after 3pm? That's our emergency window — same care, same team.
+                Select your service, pick a time window, and we'll handle the rest. Standard window runs 3pm–6pm. Need us after 6pm? That's our emergency window — same crew, same quality, higher rate.
               </p>
               <ul className="space-y-3">
                 {[
-                  "Standard slots: 9am, 11am, 1pm (Mon–Sat)",
-                  "Emergency slots: 3pm, 5pm, 7pm, 9pm (higher rate applies)",
+                  "3pm – 6pm: standard afternoon window (Mon–Sat)",
+                  "After 6pm: emergency window — higher rate applies",
                   "SMS & email confirmation sent instantly",
                   "Toilet leaks flagged for priority dispatch",
                 ].map((item) => (
@@ -276,40 +278,30 @@ function BookingWidget() {
               )}
 
               {/* Appointment time picker */}
-              <p className="text-xs font-semibold text-charcoal/60 uppercase tracking-wider mb-2">Appointment Time</p>
-              <p className="text-[10px] text-charcoal/50 mb-2">Standard slots (Mon–Sat)</p>
-              <div className="grid grid-cols-3 gap-2 mb-3">
-                {STANDARD_SLOTS.map((slot) => (
-                  <button key={slot} onClick={() => setTimeSlot(slot)}
-                    className={`py-2 rounded-xl border text-sm font-medium transition ${
-                      timeSlot === slot
-                        ? "border-turquoise bg-turquoise/10 text-turquoise"
-                        : "border-gray-200 text-charcoal hover:border-turquoise/50 hover:bg-turquoise/5"
+              <p className="text-xs font-semibold text-charcoal/60 uppercase tracking-wider mb-3">Appointment Time</p>
+              <div className="grid grid-cols-2 gap-3 mb-5">
+                {TIME_SLOTS.map((slot) => (
+                  <button key={slot.key} onClick={() => setTimeSlot(slot.key)}
+                    className={`flex flex-col items-center py-4 rounded-xl border-2 font-semibold transition ${
+                      timeSlot === slot.key
+                        ? slot.emergency
+                          ? "border-charcoal bg-charcoal text-white"
+                          : "border-turquoise bg-turquoise/10 text-turquoise"
+                        : slot.emergency
+                          ? "border-charcoal/30 text-charcoal hover:border-charcoal hover:bg-charcoal/5"
+                          : "border-gray-200 text-charcoal hover:border-turquoise/50 hover:bg-turquoise/5"
                     }`}>
-                    {slot}
-                  </button>
-                ))}
-              </div>
-              <p className="text-[10px] text-amber-600 font-semibold mb-2 flex items-center gap-1">
-                <Siren className="size-3" /> Emergency slots — after-hours
-              </p>
-              <div className="grid grid-cols-4 gap-1.5 mb-5">
-                {EMERGENCY_SLOTS.map((slot) => (
-                  <button key={slot} onClick={() => setTimeSlot(slot)}
-                    className={`py-2 rounded-xl border text-xs font-semibold transition ${
-                      timeSlot === slot
-                        ? "border-amber-500 bg-amber-50 text-amber-700"
-                        : "border-amber-200 text-amber-600 hover:border-amber-400 hover:bg-amber-50"
-                    }`}>
-                    ⚡ {slot}
+                    {slot.emergency && <Siren className="size-4 mb-1" />}
+                    <span className="text-sm">{slot.label}</span>
+                    <span className="text-[10px] font-normal mt-0.5 opacity-70">{slot.sub}</span>
                   </button>
                 ))}
               </div>
 
               {isEmergency && (
-                <div className="flex items-start gap-2 bg-amber-50 border border-amber-200 rounded-xl px-3 py-2.5 mb-4 text-xs text-charcoal/80">
-                  <Siren className="size-4 text-amber-500 shrink-0 mt-0.5" />
-                  <span><strong className="text-amber-600">Emergency rate applies</strong> — higher fee for after-hours service. We'll screen your request, confirm urgency, and dispatch fast. SMS & email confirmation sent instantly.</span>
+                <div className="flex items-start gap-2 bg-charcoal/5 border border-charcoal/20 rounded-xl px-3 py-2.5 mb-4 text-xs text-charcoal/80">
+                  <Siren className="size-4 text-charcoal shrink-0 mt-0.5" />
+                  <span><strong className="text-charcoal">Emergency rate applies</strong> — higher fee for after-hours service. We'll screen your request, confirm urgency, and dispatch fast. SMS & email confirmation sent instantly.</span>
                 </div>
               )}
 
