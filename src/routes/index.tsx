@@ -132,7 +132,7 @@ function Hero({ onBook }: { onBook: () => void }) {
 
       <div className="relative max-w-7xl mx-auto px-5 lg:px-8 pt-6 pb-20 md:py-24 w-full">
         <div className="max-w-2xl">
-          <span className="inline-flex items-center gap-2 text-turquoise text-xs font-semibold tracking-[0.2em] uppercase mb-3 md:mb-6">
+          <span className="hidden md:inline-flex items-center gap-2 text-turquoise text-xs font-semibold tracking-[0.2em] uppercase mb-6">
             <span className="size-1.5 rounded-full bg-turquoise animate-pulse" />
             {current.badge}
           </span>
@@ -153,7 +153,7 @@ function Hero({ onBook }: { onBook: () => void }) {
               <span className="hidden md:inline">{PHONE}</span>
             </a>
           </div>
-          <div className="flex flex-wrap gap-4 text-sm text-white/70">
+          <div className="hidden md:flex flex-wrap gap-4 text-sm text-white/70">
             <span className="flex items-center gap-1.5"><CheckCircle2 className="size-4 text-turquoise" /> Open 24 Hours</span>
             <span className="flex items-center gap-1.5"><CheckCircle2 className="size-4 text-turquoise" /> Licensed & Insured</span>
             <span className="flex items-center gap-1.5"><Award className="size-4 text-turquoise" /> Best of 2025</span>
