@@ -8,6 +8,7 @@ import {
 import hero1 from "@/assets/damaged-pipe-with-leaking.jpg";
 import hero2 from "@/assets/is-your-toilet-leaking.jpg";
 import hero3 from "@/assets/plumber-fixing-toilet-washroom.jpg";
+import hero4 from "@/assets/Garbage-Disposal-Repair.jpg";
 import { VoiceWidget } from "@/components/site/VoiceWidget";
 import { AlexChat } from "@/components/site/AlexChat";
 import { Reveal } from "@/components/site/Reveal";
@@ -36,26 +37,34 @@ const HERO_SLIDES = [
   {
     img: hero1,
     flip: false,
-    badge: "Home Drain Inspection · Southern Maryland",
-    line1: "Hidden Drain Problems",
-    line2: "We Find Them Fast.",
-    sub: "Most drain failures start slow and go undetected. EPR's licensed technicians inspect your home's full drainage system before small issues become expensive disasters.",
+    badge: "Pipe Leak · Southern Maryland",
+    line1: "That Leak Is Getting",
+    line2: "More Expensive.",
+    sub: "Water damage starts in minutes. EPR's licensed plumbers respond fast — diagnosing and stopping pipe leaks before a small drip becomes a flooded home.",
   },
   {
     img: hero2,
     flip: true,
-    badge: "Burst Pipe Emergency · Fast Dispatch",
-    line1: "Burst Pipe.",
-    line2: "We Answer the Call.",
-    sub: "A burst pipe floods fast. EPR screens every call, confirms urgency, and dispatches a licensed tech right away — day or night, across Southern Maryland.",
+    badge: "Toilet Leak · Priority Dispatch",
+    line1: "A Leaking Toilet Wastes",
+    line2: "200 Gallons a Day.",
+    sub: "Silent leaks rack up hundreds on your water bill before you notice. EPR finds the source and fixes it right — same day, guaranteed.",
   },
   {
     img: hero3,
     flip: false,
-    badge: "Licensed Plumbers · No Drip Too Small",
-    line1: "Every Drip",
-    line2: "Costs You Money.",
-    sub: "A slow drip wastes thousands of gallons a year. From leaking faucets to hidden pipe leaks, EPR finds and fixes it right — the first time.",
+    badge: "Licensed Plumbers · La Plata, MD",
+    line1: "Don't Trust Your Home",
+    line2: "To Just Anyone.",
+    sub: "EPR's licensed, background-checked plumbers show up on time, explain the fix clearly, and guarantee their work — no surprises, no runaround.",
+  },
+  {
+    img: hero4,
+    flip: true,
+    badge: "Garbage Disposal · Fast Repair",
+    line1: "Broken Disposal",
+    line2: "Backing Up Your Sink.",
+    sub: "A jammed or dead garbage disposal turns your kitchen into a mess fast. EPR repairs and replaces all major brands — usually fixed in a single visit.",
   },
 ] as const;
 
