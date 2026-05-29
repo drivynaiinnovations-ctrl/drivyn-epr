@@ -31,7 +31,9 @@ type LocationSlug =
   | "prince-frederick"
   | "lexington-park"
   | "brandywine"
-  | "accokeek";
+  | "accokeek"
+  | "washington-dc"
+  | "northern-virginia";
 
 const LOCATIONS_DATA: Record<LocationSlug, LocationData> = {
   "la-plata": {
@@ -200,6 +202,48 @@ const LOCATIONS_DATA: Record<LocationSlug, LocationData> = {
       { q: "Do you serve older homes in Accokeek?", a: "Yes. Accokeek has many older homes with legacy plumbing. Our technicians work with galvanized pipe, cast iron drains, and older fixtures regularly." },
       { q: "How do I book a plumber in Accokeek?", a: "Call (240) 381-9035 or use the online booking form on our website. We'll confirm your appointment and send SMS and email confirmation." },
       { q: "Is EPR Plumbing licensed for work in Accokeek?", a: "Yes. We hold a valid Maryland state plumbing license and carry full liability insurance for all work in Accokeek and Prince George's County." },
+    ],
+  },
+  "washington-dc": {
+    name: "Washington",
+    state: "DC",
+    county: "Washington DC",
+    zip: "20001",
+    title: "Plumber in Washington DC | EPR Plumbing & Remodeling",
+    description: "Licensed plumbers serving Washington DC 24/7. Fast drain cleaning, water heater service, pipe repair, leak detection, and emergency plumbing. Call (240) 381-9035.",
+    badge: "Washington, DC · 24/7 Emergency Plumbing",
+    heroLine1: "Washington DC's",
+    heroLine2: "Trusted Plumbers.",
+    heroSub: "EPR Plumbing serves Washington DC homeowners, businesses, and government facilities with licensed, insured technicians available 24/7 — fast response, upfront pricing.",
+    intro: "Washington DC's diverse mix of historic row houses, modern condos, and government facilities demands a plumber who can handle it all. EPR Plumbing brings Maryland-licensed expertise across the District — from Capitol Hill to Georgetown, Southeast to Northwest. We understand DC's unique building stock and plumbing challenges, and we respond fast when it matters most.",
+    nearbyAreas: ["Georgetown", "Capitol Hill", "Anacostia", "Petworth", "Silver Spring, MD", "Bethesda, MD"],
+    faq: [
+      { q: "Does EPR Plumbing serve Washington DC?", a: "Yes. EPR Plumbing serves Washington DC for residential, commercial, and government plumbing. Call (240) 381-9035 for same-day and emergency service." },
+      { q: "Can you handle plumbing in DC row houses and older buildings?", a: "Absolutely. We regularly work in DC's historic row houses and older buildings, including properties with cast iron drains, galvanized supply lines, and lead service connections." },
+      { q: "Do you offer emergency plumbing in DC?", a: "Yes — 24/7. Whether it's a burst pipe in the middle of the night or a sewer backup on a weekend, EPR dispatches to DC around the clock." },
+      { q: "Are you licensed to do plumbing work in Washington DC?", a: "Yes. EPR Plumbing holds the licenses required to perform plumbing work in Washington DC and carries full liability insurance on every job." },
+      { q: "Do you service government and commercial buildings in DC?", a: "Yes. EPR has experience with government facilities, multi-unit residential, and commercial properties across Washington DC, with vetted and background-checked technicians." },
+    ],
+  },
+  "northern-virginia": {
+    name: "Northern Virginia",
+    state: "VA",
+    county: "Northern Virginia",
+    zip: "22201",
+    title: "Plumber in Northern Virginia | EPR Plumbing & Remodeling",
+    description: "Licensed plumbers serving Northern Virginia 24/7 — Arlington, Alexandria, Fairfax, Falls Church & more. Drain cleaning, water heaters, pipe repair, emergency service. Call (240) 381-9035.",
+    badge: "Northern Virginia · Arlington · Alexandria · Fairfax",
+    heroLine1: "Northern Virginia",
+    heroLine2: "Plumbing Experts.",
+    heroSub: "EPR Plumbing covers Northern Virginia with licensed, insured technicians — serving Arlington, Alexandria, Fairfax, and beyond with 24/7 emergency availability and same-day service.",
+    intro: "Northern Virginia is one of the fastest-growing regions in the country, with a wide range of homes from post-war bungalows in Arlington to modern townhomes in Fairfax. EPR Plumbing brings the same professional standard we've built in Southern Maryland right across the river — fast response, transparent pricing, and licensed technicians who know what they're doing.",
+    nearbyAreas: ["Arlington", "Alexandria", "Fairfax", "Falls Church", "McLean", "Reston"],
+    faq: [
+      { q: "Does EPR Plumbing serve Northern Virginia?", a: "Yes. EPR Plumbing serves the Northern Virginia area including Arlington, Alexandria, Fairfax, Falls Church, McLean, and surrounding communities." },
+      { q: "Can I get same-day plumbing service in Northern Virginia?", a: "Yes. We offer same-day service in most of Northern Virginia. Call (240) 381-9035 early and we'll do our best to get a tech to you the same day." },
+      { q: "Do you handle emergency plumbing in Northern Virginia?", a: "Yes — 24/7 emergency dispatch to Northern Virginia for burst pipes, major leaks, sewer backups, and other urgent plumbing situations." },
+      { q: "Are you licensed to work in Virginia?", a: "Yes. EPR Plumbing holds the licenses required for plumbing work in Virginia and carries full liability insurance on all jobs in Northern Virginia." },
+      { q: "What plumbing services do you offer in Northern Virginia?", a: "We offer drain cleaning, water heater service, pipe repair, leak detection, fixture installation, toilet repair, sewer line work, garbage disposal, and emergency plumbing throughout Northern Virginia." },
     ],
   },
 };

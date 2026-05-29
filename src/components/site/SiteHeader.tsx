@@ -26,6 +26,8 @@ export const LOCATIONS_NAV = [
   { label: "Lexington Park, MD",    href: "/locations/lexington-park" },
   { label: "Brandywine, MD",        href: "/locations/brandywine" },
   { label: "Accokeek, MD",          href: "/locations/accokeek" },
+  { label: "Washington, DC",        href: "/locations/washington-dc" },
+  { label: "Northern Virginia",     href: "/locations/northern-virginia" },
 ] as const;
 
 export function SiteHeader({ bookHref = "/#book-service" }: { bookHref?: string }) {
