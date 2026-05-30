@@ -1,4 +1,4 @@
-﻿import { X, Calendar, CheckCircle2 } from "lucide-react";
+import { X, Calendar, CheckCircle2 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
 type Field = { name: string; phone: string; service: string; date: string; notes: string };
@@ -124,7 +124,7 @@ export function BookingModal({ open, onClose }: { open: boolean; onClose: () => 
                 onChange={set("service")}
                 className="w-full border border-border rounded-lg px-3 py-2.5 text-sm text-charcoal focus:outline-none focus:ring-2 focus:ring-turquoise/40 focus:border-turquoise transition bg-white"
               >
-                <option value="" disabled>Select a serviceâ€¦</option>
+                <option value="" disabled>Select a service…</option>
                 {SERVICES.map((s) => <option key={s} value={s}>{s}</option>)}
               </select>
             </div>
@@ -145,7 +145,7 @@ export function BookingModal({ open, onClose }: { open: boolean; onClose: () => 
               <textarea
                 value={fields.notes}
                 onChange={set("notes")}
-                placeholder="Describe the issue or any access instructionsâ€¦"
+                placeholder="Describe the issue or any access instructions…"
                 rows={3}
                 className="w-full border border-border rounded-lg px-3 py-2.5 text-sm text-charcoal placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-turquoise/40 focus:border-turquoise transition resize-none"
               />

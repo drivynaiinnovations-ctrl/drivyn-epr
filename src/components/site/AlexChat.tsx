@@ -1,4 +1,4 @@
-﻿import { X, PhoneCall } from "lucide-react";
+import { X, PhoneCall } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { chatWithAlex } from "@/lib/chatWithAlex";
 import { startVapi } from "@/lib/vapi";
@@ -128,7 +128,7 @@ export function AlexChat({ open, onClose }: { open: boolean; onClose: () => void
             value={input}
             onChange={(e) => setInput(e.target.value)}
             disabled={loading}
-            placeholder="Ask a plumbing questionâ€¦"
+            placeholder="Ask a plumbing question…"
             className="flex-1 border border-border rounded-lg px-3 py-2 text-sm text-charcoal placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-turquoise/40 focus:border-turquoise transition disabled:opacity-50"
           />
           <button
