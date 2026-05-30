@@ -32,6 +32,7 @@ const PHONE = "(605) 815-1039";
 const EMAIL = "GetStarted@eprplumbingandremodeling.com";
 const ADDRESS = "8270 Fairground Rd, La Plata, MD 20646";
 const GHL_BOOKING_URL = "#book"; // Replace with GoHighLevel calendar link when ready
+const GOOGLE_REVIEW_COUNT = 47; // Update with actual Google review count
 
 const HERO_SLIDES = [
   {
@@ -169,14 +170,16 @@ function Hero({ onBook }: { onBook: () => void }) {
             <Phone className="size-5" /> Call Us Now!
           </a>
           <a href="https://share.google/4BzA8eE3sYbnUza0f" target="_blank" rel="noopener noreferrer"
-            className="bg-white px-6 py-3.5 rounded-xl flex items-center justify-center gap-3 hover:opacity-90 transition shadow-md">
+            className="bg-white px-5 py-3.5 rounded-xl flex items-center justify-center gap-2.5 hover:opacity-90 transition shadow-md">
             <span className="flex gap-0.5">
-              {[0,1,2,3,4].map((i) => <Star key={i} className="size-4 fill-yellow-400 text-yellow-400" />)}
+              {[0,1,2,3,4].map((i) => <Star key={i} className="size-3.5 fill-yellow-400 text-yellow-400" />)}
             </span>
+            <span className="text-charcoal font-bold text-sm">5.0</span>
+            <span className="text-charcoal/20 text-sm">|</span>
             <span className="font-bold text-sm">
               <span className="text-[#4285F4]">G</span><span className="text-[#EA4335]">o</span><span className="text-[#FBBC05]">o</span><span className="text-[#4285F4]">g</span><span className="text-[#34A853]">l</span><span className="text-[#EA4335]">e</span>
             </span>
-            <span className="text-charcoal/70 text-sm font-medium">Reviews</span>
+            <span className="text-charcoal/50 text-xs font-medium">{GOOGLE_REVIEW_COUNT} Reviews</span>
           </a>
         </div>
       </section>
@@ -378,9 +381,18 @@ function BookingWidget() {
                 <ArrowRight className="size-4" />
               </a>
 
-              <p className="text-xs text-charcoal/40 text-center mt-3">
-                No payment required to book · Confirmation via SMS & email
-              </p>
+              <div className="mt-4 space-y-2">
+                {[
+                  "No payment required to book",
+                  "SMS & email confirmation sent instantly",
+                  "Licensed & Insured · Open 24 Hours",
+                ].map((item) => (
+                  <div key={item} className="flex items-center gap-2 text-xs text-charcoal/60">
+                    <CheckCircle2 className="size-3.5 text-turquoise shrink-0" />
+                    <span>{item}</span>
+                  </div>
+                ))}
+              </div>
             </div>
           </Reveal>
         </div>
