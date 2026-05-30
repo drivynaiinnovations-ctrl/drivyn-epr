@@ -72,9 +72,9 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "EPR Plumbing & Remodeling â€” Southern Maryland's Trusted Plumbers" },
+      { title: "EPR Plumbing & Remodeling — Southern Maryland's Trusted Plumbers" },
       { name: "description", content: "Licensed plumbers serving Charles, Prince George's, Calvert & St. Mary's Counties. Drain cleaning, water heaters, pipe repair, emergency service 24/7. La Plata, MD." },
-      { property: "og:title", content: "EPR Plumbing & Remodeling â€” La Plata, MD" },
+      { property: "og:title", content: "EPR Plumbing & Remodeling — La Plata, MD" },
       { property: "og:description", content: "Southern Maryland's trusted plumbing team. Residential, commercial & government. Call (605) 815-1039." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },

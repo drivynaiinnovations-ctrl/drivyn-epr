@@ -6,7 +6,7 @@ import { startVapi } from "@/lib/vapi";
 type Role = "alex" | "user";
 interface Msg { role: Role; text: string }
 
-const OPENING = "Hi! I'm Alex, EPR Plumbing's virtual assistant. I can answer questions about our services, pricing, and availability â€” or connect you with a live plumber. What can I help you with?";
+const OPENING = "Hi! I'm Alex, EPR Plumbing's virtual assistant. I can answer questions about our services, pricing, and availability — or connect you with a live plumber. What can I help you with?";
 
 export function AlexChat({ open, onClose }: { open: boolean; onClose: () => void }) {
   const [messages, setMessages] = useState<Msg[]>([]);
@@ -80,7 +80,7 @@ export function AlexChat({ open, onClose }: { open: boolean; onClose: () => void
           <div className="flex items-center gap-3">
             <div className="size-9 rounded-full bg-turquoise flex items-center justify-center text-white font-bold text-sm">A</div>
             <div>
-              <p className="font-semibold text-charcoal text-sm leading-tight">Alex Â· EPR Plumbing</p>
+              <p className="font-semibold text-charcoal text-sm leading-tight">Alex · EPR Plumbing</p>
               <p className="text-xs text-turquoise flex items-center gap-1">
                 <span className="size-1.5 rounded-full bg-turquoise animate-pulse inline-block" /> Online now
               </p>

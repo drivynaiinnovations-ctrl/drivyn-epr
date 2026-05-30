@@ -1,4 +1,4 @@
-﻿import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import { useState, useEffect } from "react";
 import {
   Phone, Calendar, ShieldCheck, Clock, Home, Building2, Landmark,
@@ -19,9 +19,9 @@ export const Route = createFileRoute("/")({
   component: Index,
   head: () => ({
     meta: [
-      { title: "EPR Plumbing & Remodeling â€” Southern Maryland's Trusted Plumbers" },
+      { title: "EPR Plumbing & Remodeling — Southern Maryland's Trusted Plumbers" },
       { name: "description", content: "Licensed Southern Maryland plumbers serving Charles, Prince George's, Calvert & St. Mary's Counties. Drain cleaning, water heaters, pipe repair, emergency service 24/7. Call (605) 815-1039." },
-      { property: "og:title", content: "EPR Plumbing & Remodeling â€” La Plata, MD" },
+      { property: "og:title", content: "EPR Plumbing & Remodeling — La Plata, MD" },
       { property: "og:description", content: "Trusted plumbing and remodeling for homes, businesses and government facilities in Southern Maryland." },
       { property: "og:image", content: hero1 },
     ],
@@ -37,34 +37,34 @@ const HERO_SLIDES = [
   {
     img: hero1,
     flip: false,
-    badge: "Pipe Leak Â· Southern Maryland",
+    badge: "Pipe Leak · Southern Maryland",
     line1: "That Leak Is Getting",
     line2: "More Expensive.",
-    sub: "Water damage starts in minutes. EPR's licensed plumbers respond fast â€” diagnosing and stopping pipe leaks before a small drip becomes a flooded home.",
+    sub: "Water damage starts in minutes. EPR's licensed plumbers respond fast — diagnosing and stopping pipe leaks before a small drip becomes a flooded home.",
   },
   {
     img: hero2,
     flip: true,
-    badge: "Toilet Leak Â· Priority Dispatch",
+    badge: "Toilet Leak · Priority Dispatch",
     line1: "A Leaking Toilet Wastes",
     line2: "200 Gallons a Day.",
-    sub: "Silent leaks rack up hundreds on your water bill before you notice. EPR finds the source and fixes it right â€” same day, guaranteed.",
+    sub: "Silent leaks rack up hundreds on your water bill before you notice. EPR finds the source and fixes it right — same day, guaranteed.",
   },
   {
     img: hero3,
     flip: false,
-    badge: "Licensed Plumbers Â· La Plata, MD",
+    badge: "Licensed Plumbers · La Plata, MD",
     line1: "Don't Trust Your Home",
     line2: "To Just Anyone.",
-    sub: "EPR's licensed, background-checked plumbers show up on time, explain the fix clearly, and guarantee their work â€” no surprises, no runaround.",
+    sub: "EPR's licensed, background-checked plumbers show up on time, explain the fix clearly, and guarantee their work — no surprises, no runaround.",
   },
   {
     img: hero4,
     flip: true,
-    badge: "Garbage Disposal Â· Fast Repair",
+    badge: "Garbage Disposal · Fast Repair",
     line1: "Broken Disposal",
     line2: "Backing Up Your Sink.",
-    sub: "A jammed or dead garbage disposal turns your kitchen into a mess fast. EPR repairs and replaces all major brands â€” usually fixed in a single visit.",
+    sub: "A jammed or dead garbage disposal turns your kitchen into a mess fast. EPR repairs and replaces all major brands — usually fixed in a single visit.",
   },
 ] as const;
 
@@ -80,10 +80,10 @@ const SERVICES = [
 ] as const;
 
 const TIME_SLOTS = [
-  { key: "9am-11am",  label: "9am â€“ 11am",  sub: "Standard rate",          emergency: false },
-  { key: "11am-1pm",  label: "11am â€“ 1pm",  sub: "Standard rate",          emergency: false },
-  { key: "1pm-3pm",   label: "1pm â€“ 3pm",   sub: "Standard rate",          emergency: false },
-  { key: "3pm-6pm",   label: "3pm â€“ 6pm",   sub: "Emergency rate applies", emergency: true  },
+  { key: "9am-11am",  label: "9am – 11am",  sub: "Standard rate",          emergency: false },
+  { key: "11am-1pm",  label: "11am – 1pm",  sub: "Standard rate",          emergency: false },
+  { key: "1pm-3pm",   label: "1pm – 3pm",   sub: "Standard rate",          emergency: false },
+  { key: "3pm-6pm",   label: "3pm – 6pm",   sub: "Emergency rate applies", emergency: true  },
   { key: "after-7pm", label: "After 7pm",   sub: "Emergency rate applies", emergency: true  },
 ] as const;
 
@@ -95,6 +95,21 @@ const REVIEWS = [
 ];
 
 // â”€â”€ Main page â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+function TypeWriter({ text }: { text: string }) {
+  const [displayed, setDisplayed] = useState("");
+  useEffect(() => {
+    let i = 0;
+    setDisplayed("");
+    const timer = setInterval(() => {
+      i++;
+      setDisplayed(text.slice(0, i));
+      if (i >= text.length) clearInterval(timer);
+    }, 60);
+    return () => clearInterval(timer);
+  }, [text]);
+  return <span>{displayed}<span className="animate-pulse">|</span></span>;
+}
+
 function Index() {
   const [bookingOpen, setBookingOpen] = useState(false);
   return (
@@ -134,12 +149,14 @@ function Hero({ onBook }: { onBook: () => void }) {
       {/* â”€â”€ Mobile hero: clean CTA panel, no images â”€â”€ */}
       <section className="md:hidden bg-charcoal px-5 py-10 flex flex-col gap-5">
         <div>
-          <p className="text-turquoise text-xs font-semibold tracking-[0.2em] uppercase mb-3">Open 24 Hours for Emergencies Â· Always Available</p>
+          <p className="text-amber-400 text-xs font-semibold tracking-[0.2em] uppercase mb-3">
+            <TypeWriter text="Quick Dispatch Services" />
+          </p>
           <h1 className="font-display font-black text-white leading-none mb-4" style={{ fontSize: "min(15.5vw, 5.5rem)" }}>
             Need a Plumber<br /><span className="text-turquoise">Right Now?</span>
           </h1>
           <p className="text-white/70 text-base leading-relaxed">
-            EPR Plumbing handles drain clogs, water heaters, leaks, and emergency calls â€” same day, guaranteed.
+            EPR Plumbing handles drain clogs, water heaters, leaks, and emergency calls — same day, guaranteed.
           </p>
         </div>
         <div className="flex flex-col gap-3">
@@ -235,21 +252,6 @@ function TrustBar() {
   );
 }
 
-function TypeWriter({ text }: { text: string }) {
-  const [displayed, setDisplayed] = useState("");
-  useEffect(() => {
-    let i = 0;
-    setDisplayed("");
-    const timer = setInterval(() => {
-      i++;
-      setDisplayed(text.slice(0, i));
-      if (i >= text.length) clearInterval(timer);
-    }, 60);
-    return () => clearInterval(timer);
-  }, [text]);
-  return <span>{displayed}<span className="animate-pulse">|</span></span>;
-}
-
 function BookingWidget() {
   const [selected, setSelected] = useState<string>("drain");
   const [timeSlot, setTimeSlot] = useState<string>("9am-11am");
@@ -263,19 +265,16 @@ function BookingWidget() {
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <Reveal>
             <div>
-              <p className="text-amber-400 text-xs font-semibold tracking-[0.2em] uppercase mb-3">
-                <TypeWriter text="Quick Dispatch Service" />
-              </p>
               <h2 className="font-display text-4xl md:text-5xl font-semibold text-charcoal mb-5 leading-tight">
                 Book Your Service <br />in Seconds.
               </h2>
               <p className="text-lg text-muted-foreground leading-relaxed mb-6">
-                Select your service, pick a time window, and we'll handle the rest. Standard slots run 9amâ€“3pm. After 3pm and evening slots are emergency rate â€” same licensed crew, priority dispatch.
+                Select your service, pick a time window, and we'll handle the rest. Standard slots run 9am–3pm. After 3pm and evening slots are emergency rate — same licensed crew, priority dispatch.
               </p>
               <ul className="hidden md:block space-y-3">
                 {[
-                  "9am â€“ 11am, 11am â€“ 1pm, 1pm â€“ 3pm: standard rate",
-                  "3pm â€“ 6pm & After 7pm: emergency rate applies",
+                  "9am – 11am, 11am – 1pm, 1pm – 3pm: standard rate",
+                  "3pm – 6pm & After 7pm: emergency rate applies",
                   "SMS & email confirmation sent instantly",
                   "Toilet leaks flagged for priority dispatch",
                 ].map((item) => (
@@ -336,7 +335,7 @@ function BookingWidget() {
               {isToilet && (
                 <div className="flex items-start gap-2 bg-turquoise/8 border border-turquoise/30 rounded-xl px-3 py-2.5 mb-4 text-xs text-charcoal/80">
                   <AlertTriangle className="size-4 text-turquoise shrink-0 mt-0.5" />
-                  <span><strong className="text-turquoise">Priority dispatch</strong> â€” toilet issues are flagged for our fastest available tech.</span>
+                  <span><strong className="text-turquoise">Priority dispatch</strong> — toilet issues are flagged for our fastest available tech.</span>
                 </div>
               )}
 
@@ -354,7 +353,7 @@ function BookingWidget() {
                 >
                   {TIME_SLOTS.map((slot) => (
                     <option key={slot.key} value={slot.key} className="bg-white text-charcoal font-normal">
-                      {slot.emergency ? `${slot.label} â€” Emergency` : slot.label}
+                      {slot.emergency ? `${slot.label} — Emergency` : slot.label}
                     </option>
                   ))}
                 </select>
@@ -369,7 +368,7 @@ function BookingWidget() {
               {isEmergency && (
                 <div className="flex items-start gap-2 bg-charcoal/5 border border-charcoal/20 rounded-xl px-3 py-2.5 mb-4 text-xs text-charcoal/80">
                   <Siren className="size-4 text-charcoal shrink-0 mt-0.5" />
-                  <span><strong className="text-charcoal">Emergency rate applies</strong> â€” higher fee for after-hours service. We'll screen your request, confirm urgency, and dispatch fast. SMS & email confirmation sent instantly.</span>
+                  <span><strong className="text-charcoal">Emergency rate applies</strong> — higher fee for after-hours service. We'll screen your request, confirm urgency, and dispatch fast. SMS & email confirmation sent instantly.</span>
                 </div>
               )}
 
@@ -379,22 +378,9 @@ function BookingWidget() {
                 <ArrowRight className="size-4" />
               </a>
 
-              <p className="text-xs font-semibold text-charcoal/50 text-center mt-3 tracking-wide uppercase">
-                No Payment Required to Book
+              <p className="text-xs text-charcoal/40 text-center mt-3">
+                No payment required to book · Confirmation via SMS & email
               </p>
-
-              <div className="mt-3 space-y-2">
-                {[
-                  "SMS & email confirmation sent instantly",
-                  "Toilet leaks get priority dispatch",
-                  "Licensed & Insured Â· Open 24 Hours",
-                ].map((item) => (
-                  <div key={item} className="flex items-center gap-2 text-xs text-charcoal/60">
-                    <CheckCircle2 className="size-3.5 text-turquoise shrink-0" />
-                    <span>{item}</span>
-                  </div>
-                ))}
-              </div>
             </div>
           </Reveal>
         </div>
@@ -418,7 +404,7 @@ function SectionHeader({ kicker, title, sub }: { kicker?: string; title: string;
 function WhoWeServe() {
   const cards = [
     {
-      icon: Home, title: "Residential", tag: "Your home, your family â€” handled with care.",
+      icon: Home, title: "Residential", tag: "Your home, your family — handled with care.",
       items: ["Emergency leak & burst pipe repair", "Drain cleaning & unclogging", "Water heater install & repair", "Toilet, faucet & fixture service", "Full bathroom & kitchen plumbing", "Preventive maintenance visits"],
     },
     {
@@ -434,7 +420,7 @@ function WhoWeServe() {
     <section id="who" className="py-24 bg-white scroll-mt-16">
       <div className="max-w-7xl mx-auto px-5 lg:px-8">
         <SectionHeader kicker="Built for Every Customer" title="One team. Every plumbing need."
-          sub="Residential, commercial, and government across Southern Maryland â€” one standard of excellence, every call." />
+          sub="Residential, commercial, and government across Southern Maryland — one standard of excellence, every call." />
         <div className="grid md:grid-cols-3 gap-6">
           {cards.map((c, i) => (
             <Reveal key={c.title} delay={i * 100}>
@@ -465,14 +451,14 @@ function Services() {
     { icon: Gauge, title: "Water Heater", items: ["Tank water heater install & repair", "Tankless water heater install", "Thermostat & element replacement", "Anode rod service", "Emergency same-day replacement", "Energy-efficient upgrades"] },
     { icon: Wrench, title: "Pipe & Leak Repair", items: ["Burst & leaking pipe repair", "Pipe rerouting & repiping", "Slab leak detection & repair", "Copper, PVC & PEX pipe work", "Pressure testing & balancing", "Whole-house repiping"] },
     { icon: Home, title: "Fixtures & Appliances", items: ["Faucet & sink installation", "Toilet install, repair & replace", "Shower & tub fixture service", "Garbage disposal install", "Dishwasher & appliance hookup", "Outdoor hose bib service"] },
-    { icon: Siren, title: "Emergency Service", items: ["24/7 emergency dispatch", "Burst pipe response â€” fast", "Flood & overflow mitigation", "Shut-off valve service", "After-hours emergency slots from 3pm", "Priority toilet leak response"] },
+    { icon: Siren, title: "Emergency Service", items: ["24/7 emergency dispatch", "Burst pipe response — fast", "Flood & overflow mitigation", "Shut-off valve service", "After-hours emergency slots from 3pm", "Priority toilet leak response"] },
     { icon: ShieldCheck, title: "Inspection & Prevention", items: ["Full plumbing inspections", "Backflow prevention & testing", "Water quality testing", "Preventive maintenance plans", "Pre-purchase inspections", "Water pressure optimization"] },
   ];
   return (
     <section id="services" className="py-24 bg-secondary/40 scroll-mt-16">
       <div className="max-w-7xl mx-auto px-5 lg:px-8">
         <SectionHeader kicker="Everything Plumbing. All In One Place." title="A complete plumbing service."
-          sub="We handle everything â€” from a dripping faucet to a full sewer line replacement. No subcontracting, no runaround." />
+          sub="We handle everything — from a dripping faucet to a full sewer line replacement. No subcontracting, no runaround." />
         <div className="grid md:grid-cols-2 gap-6">
           {groups.map((g, i) => (
             <Reveal key={g.title} delay={(i % 2) * 80}>
@@ -502,10 +488,10 @@ function Services() {
 
 function EmergencyProtocol() {
   const steps = [
-    { icon: Phone, title: "You Call or Book", body: "Reach us by phone, chat, or our booking widget â€” any time, day or night. Our AI answers instantly so you never wait." },
+    { icon: Phone, title: "You Call or Book", body: "Reach us by phone, chat, or our booking widget — any time, day or night. Our AI answers instantly so you never wait." },
     { icon: Siren, title: "We Screen & Confirm", body: "We ask about the nature and urgency of your issue. For after-hours requests, we confirm you're aware this is an emergency service and express that we're happy to help." },
     { icon: CheckCircle2, title: "Confirmation Sent", body: "You receive SMS and email confirmation the moment your appointment is set. Our night-duty manager receives a full job summary and your location." },
-    { icon: Wrench, title: "Tech Dispatched", body: "A licensed EPR plumber heads your way. Toilet leaks and burst pipes get priority dispatch â€” we don't sit on urgent calls." },
+    { icon: Wrench, title: "Tech Dispatched", body: "A licensed EPR plumber heads your way. Toilet leaks and burst pipes get priority dispatch — we don't sit on urgent calls." },
   ];
   return (
     <section className="py-24 bg-charcoal">
@@ -535,7 +521,7 @@ function EmergencyProtocol() {
         <Reveal>
           <div className="mt-12 rounded-2xl bg-turquoise/10 border border-turquoise/30 p-6 text-center max-w-2xl mx-auto">
             <p className="text-white/90 text-sm leading-relaxed">
-              <strong className="text-turquoise">Priority flag:</strong> Toilet leaks are automatically escalated to our fastest available technician â€” no waiting, no delays.
+              <strong className="text-turquoise">Priority flag:</strong> Toilet leaks are automatically escalated to our fastest available technician — no waiting, no delays.
             </p>
           </div>
         </Reveal>
@@ -546,8 +532,8 @@ function EmergencyProtocol() {
 
 function HowItWorks() {
   const steps = [
-    { n: "01", title: "Select Your Service", body: "Choose from our booking widget â€” drain, water heater, pipe repair, fixtures, and more. One click to start." },
-    { n: "02", title: "Pick a Time Slot", body: "Standard slots from 9amâ€“1pm. Emergency slots from 3pm onwards, same day. We'll confirm by SMS and email." },
+    { n: "01", title: "Select Your Service", body: "Choose from our booking widget — drain, water heater, pipe repair, fixtures, and more. One click to start." },
+    { n: "02", title: "Pick a Time Slot", body: "Standard slots from 9am–1pm. Emergency slots from 3pm onwards, same day. We'll confirm by SMS and email." },
     { n: "03", title: "EPR Shows Up. Problem Solved.", body: "A licensed tech arrives on time with the right parts. We do the job, walk you through it, and guarantee the work." },
   ];
   return (
@@ -577,7 +563,7 @@ function GoogleReviews() {
   return (
     <section className="py-24 bg-secondary/40">
       <div className="max-w-7xl mx-auto px-5 lg:px-8">
-        <SectionHeader kicker="Google Reviews Â· 5â˜… Rated" title="What Southern Maryland Says About Us"
+        <SectionHeader kicker="Google Reviews · 5â˜… Rated" title="What Southern Maryland Says About Us"
           sub="Trusted by homeowners, businesses, and facilities across Charles, Prince George's, Calvert & St. Mary's Counties." />
         <div className="grid md:grid-cols-2 gap-6">
           {REVIEWS.map((r, i) => (
@@ -606,7 +592,7 @@ function GoogleReviews() {
           ))}
         </div>
         <Reveal>
-          <p className="text-center text-sm text-muted-foreground mt-8">Verified reviews from Google Â· EPR Plumbing & Remodeling</p>
+          <p className="text-center text-sm text-muted-foreground mt-8">Verified reviews from Google · EPR Plumbing & Remodeling</p>
         </Reveal>
       </div>
     </section>
@@ -618,8 +604,8 @@ function ServiceArea() {
   return (
     <section id="area" className="py-24 bg-white scroll-mt-16">
       <div className="max-w-7xl mx-auto px-5 lg:px-8">
-        <SectionHeader kicker="Service Area â€” Southern Maryland" title="Proudly Serving Southern Maryland"
-          sub="Based in La Plata â€” covering Charles, Prince George's, Calvert & St. Mary's Counties." />
+        <SectionHeader kicker="Service Area — Southern Maryland" title="Proudly Serving Southern Maryland"
+          sub="Based in La Plata — covering Charles, Prince George's, Calvert & St. Mary's Counties." />
         <Reveal>
           <div className="flex flex-wrap justify-center gap-3 max-w-4xl mx-auto">
             {areas.map((a) => (
@@ -644,7 +630,7 @@ function FinalCTA({ onBook }: { onBook: () => void }) {
             That Leak Won't Fix Itself. <span className="text-turquoise">We Will.</span>
           </h2>
           <p className="text-white/75 text-lg md:text-xl mb-10 max-w-2xl mx-auto">
-            Book online or call EPR directly â€” Southern Maryland's trusted plumbing team is ready for your home, business, or facility.
+            Book online or call EPR directly — Southern Maryland's trusted plumbing team is ready for your home, business, or facility.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
             <a href="#book-service" className="bg-turquoise text-white font-semibold px-8 py-4 rounded-xl inline-flex items-center justify-center gap-2 hover:opacity-90 shadow-turquoise transition animate-float">

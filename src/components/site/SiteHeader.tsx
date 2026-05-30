@@ -52,7 +52,7 @@ export function SiteHeader({ bookHref = "/#book-service" }: { bookHref?: string 
   return (
     <header className="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-border">
       <div className="max-w-7xl mx-auto px-5 lg:px-8">
-        {/* Main row â€” logo + nav + actions */}
+        {/* Main row — logo + nav + actions */}
         <div className="h-16 flex items-center justify-between">
           <Link to="/" className="flex items-center gap-2">
             <div className="size-9 rounded-lg bg-turquoise flex items-center justify-center text-white"><Droplets className="size-5" /></div>

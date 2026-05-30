@@ -36,7 +36,7 @@ export function SiteFooter() {
           <a href={`mailto:${EMAIL}`} className="text-sm flex items-center gap-2 hover:text-turquoise transition">
             <Mail className="size-4 text-turquoise" /> {EMAIL}
           </a>
-          <p className="text-xs text-white/40 mt-4">Licensed & Insured Â· Southern Maryland</p>
+          <p className="text-xs text-white/40 mt-4">Licensed & Insured · Southern Maryland</p>
         </div>
       </div>
       <div className="border-t border-white/10 py-5 text-center text-xs text-white/50">
