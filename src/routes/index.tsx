@@ -242,7 +242,7 @@ function TrustBar() {
     { icon: CheckCircle2, label: "We Accept Most Forms of Payment" },
   ];
   return (
-    <section className="bg-white border-b border-border">
+    <section className="hidden md:block bg-white border-b border-border">
       <div className="max-w-7xl mx-auto px-5 lg:px-8 py-6 flex flex-col sm:flex-row gap-4 sm:gap-8">
         {items.map((it) => (
           <div key={it.label} className="flex items-center gap-2.5 text-sm flex-1">
