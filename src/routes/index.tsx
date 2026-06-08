@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState, useEffect } from "react";
+import { getVisitorGeo } from "@/lib/getVisitorGeo";
 import {
   Phone, Calendar, ShieldCheck, Clock, Home, Building2, Landmark,
   Wrench, Siren, CheckCircle2, ArrowRight, Mail, Droplets,
@@ -16,16 +17,25 @@ import { SiteHeader } from "@/components/site/SiteHeader";
 import { SiteFooter } from "@/components/site/SiteFooter";
 
 export const Route = createFileRoute("/")({
+  loader: async () => {
+    const geo = await getVisitorGeo();
+    return { geo };
+  },
   component: Index,
-  head: () => ({
-    meta: [
-      { title: "EPR Plumbing & Remodeling — Southern Maryland's Trusted Plumbers" },
-      { name: "description", content: "Licensed Southern Maryland plumbers serving Charles, Prince George's, Calvert & St. Mary's Counties. Drain cleaning, water heaters, pipe repair, emergency service 24/7. Call (605) 815-1039." },
-      { property: "og:title", content: "EPR Plumbing & Remodeling — La Plata, MD" },
-      { property: "og:description", content: "Trusted plumbing and remodeling for homes, businesses and government facilities in Southern Maryland." },
-      { property: "og:image", content: hero1 },
-    ],
-  }),
+  head: ({ loaderData }) => {
+    const city = loaderData?.geo?.city ?? null;
+    const locationLabel = city ? `${city}, MD` : "Southern Maryland";
+    const titleCity = city ? `${city} MD` : "Southern Maryland";
+    return {
+      meta: [
+        { title: `Plumber ${titleCity} | EPR Plumbing & Remodeling` },
+        { name: "description", content: `Licensed plumbers serving ${locationLabel} — drain cleaning, water heaters, pipe repair & emergency service 24/7. Residential, commercial & government. Call (605) 815-1039.` },
+        { property: "og:title", content: `EPR Plumbing & Remodeling — ${locationLabel}` },
+        { property: "og:description", content: `Trusted plumbing and remodeling for homes, businesses, and government facilities in ${locationLabel}. Licensed, insured, open 24 hours.` },
+        { property: "og:image", content: hero1 },
+      ],
+    };
+  },
 });
 
 const PHONE = "(605) 815-1039";

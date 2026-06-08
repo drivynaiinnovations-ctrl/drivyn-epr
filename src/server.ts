@@ -69,8 +69,17 @@ async function normalizeCatastrophicSsrResponse(response: Response): Promise<Res
 export default {
   async fetch(request: Request, env: unknown, ctx: unknown) {
     try {
+      const cf = (request as unknown as { cf?: { city?: string; regionCode?: string } }).cf;
+      let handlerRequest = request;
+      if (cf?.city) {
+        const headers = new Headers(request.headers);
+        headers.set("x-cf-city", cf.city);
+        if (cf.regionCode) headers.set("x-cf-region", cf.regionCode);
+        handlerRequest = new Request(request, { headers });
+      }
+
       const handler = await getServerEntry();
-      const response = await handler.fetch(request, env, ctx);
+      const response = await handler.fetch(handlerRequest, env, ctx);
       return await normalizeCatastrophicSsrResponse(response);
     } catch (error) {
       console.error(error);
