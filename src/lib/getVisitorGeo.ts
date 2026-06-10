@@ -1,5 +1,5 @@
 import { createServerFn } from "@tanstack/react-start";
-import { getWebRequest } from "@tanstack/react-start/server";
+import { getRequest } from "@tanstack/react-start/server";
 
 const SERVICE_AREA_CITIES = new Set([
   "la plata", "waldorf", "white plains", "indian head", "port tobacco",
@@ -21,7 +21,7 @@ function resolveDisplayCity(cfCity: string | null): string | null {
 }
 
 export const getVisitorGeo = createServerFn({ method: "GET" }).handler(async () => {
-  const request = getWebRequest();
+  const request = getRequest();
   const cfCity = request?.headers.get("x-cf-city") ?? null;
   return { city: resolveDisplayCity(cfCity) };
 });
