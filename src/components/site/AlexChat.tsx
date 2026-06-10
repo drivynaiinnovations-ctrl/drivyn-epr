@@ -52,7 +52,7 @@ export function AlexChat({ open, onClose }: { open: boolean; onClose: () => void
       if (sid) setSessionId(sid);
       setMessages((m) => [...m, { role: "alex", text: reply }]);
     } catch {
-      setMessages((m) => [...m, { role: "alex", text: "Sorry, something went wrong. Please call us at (605) 815-1039." }]);
+      setMessages((m) => [...m, { role: "alex", text: "Sorry, something went wrong. Please call us at (240) 381-9035." }]);
     } finally {
       setLoading(false);
     }

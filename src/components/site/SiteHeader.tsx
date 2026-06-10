@@ -2,7 +2,7 @@
 import { Link } from "@tanstack/react-router";
 import { Phone, Menu, X, ChevronDown, Droplets, Gauge, Wrench, Home, AlertTriangle, Zap, ShieldCheck, Siren, MapPin, CalendarDays } from "lucide-react";
 
-const PHONE = "(605) 815-1039";
+const PHONE = "(240) 381-9035";
 
 export const SERVICE_NAV = [
   { label: "Drain Cleaning",        href: "/services/drain-cleaning",        icon: Droplets },
