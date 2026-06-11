@@ -41,7 +41,6 @@ export const Route = createFileRoute("/")({
 const PHONE = "(240) 381-9035";
 const EMAIL = "GetStarted@eprplumbingandremodeling.com";
 const ADDRESS = "8270 Fairground Rd, La Plata, MD 20646";
-const GHL_BOOKING_URL = "#book"; // Replace with GoHighLevel calendar link when ready
 const GOOGLE_REVIEW_COUNT = 47; // Update with actual Google review count
 
 const HERO_SLIDES = [
@@ -79,24 +78,6 @@ const HERO_SLIDES = [
   },
 ] as const;
 
-const SERVICES = [
-  { key: "drain", label: "Drain Cleaning", icon: Droplets, priority: false },
-  { key: "water_heater", label: "Water Heater", icon: Gauge, priority: false },
-  { key: "pipe_repair", label: "Pipe Repair", icon: Wrench, priority: false },
-  { key: "fixture", label: "Fixture Install", icon: Home, priority: false },
-  { key: "toilet", label: "Toilet Service", icon: AlertTriangle, priority: true },
-  { key: "sewer", label: "Sewer Line", icon: Zap, priority: false },
-  { key: "leak", label: "Leak Detection", icon: Droplets, priority: false },
-  { key: "disposal", label: "Garbage Disposal", icon: Wrench, priority: false },
-] as const;
-
-const TIME_SLOTS = [
-  { key: "9am-11am",  label: "9am – 11am",  sub: "Standard rate",          emergency: false },
-  { key: "11am-1pm",  label: "11am – 1pm",  sub: "Standard rate",          emergency: false },
-  { key: "1pm-3pm",   label: "1pm – 3pm",   sub: "Standard rate",          emergency: false },
-  { key: "3pm-6pm",   label: "3pm – 6pm",   sub: "Emergency rate applies", emergency: true  },
-  { key: "after-7pm", label: "After 7pm",   sub: "Emergency rate applies", emergency: true  },
-] as const;
 
 const REVIEWS = [
   { name: "James T.", location: "Waldorf, MD", rating: 5, text: "EPR came out same day for a burst pipe under my sink. Tech was professional, explained everything, and the price was fair. Couldn't ask for better service." },
@@ -265,12 +246,18 @@ function TrustBar() {
   );
 }
 
-function BookingWidget() {
-  const [selected, setSelected] = useState<string>("drain");
-  const [timeSlot, setTimeSlot] = useState<string>("9am-11am");
+const GHL_CALENDAR_SRC = "https://links.getdrivynai.com/widget/group/aXPOA4GURKRJaJEg2lGi";
+const GHL_CALENDAR_ID = "aXPOA4GURKRJaJEg2lGi_1781181273431";
 
-  const isToilet = selected === "toilet";
-  const isEmergency = TIME_SLOTS.find((s) => s.key === timeSlot)?.emergency ?? false;
+function BookingWidget() {
+  useEffect(() => {
+    if (document.getElementById("ghl-form-embed-script")) return;
+    const script = document.createElement("script");
+    script.id = "ghl-form-embed-script";
+    script.src = "https://links.getdrivynai.com/js/form_embed.js";
+    script.type = "text/javascript";
+    document.body.appendChild(script);
+  }, []);
 
   return (
     <section id="book-service" className="py-20 bg-secondary/40 scroll-mt-16">
@@ -301,109 +288,13 @@ function BookingWidget() {
           </Reveal>
 
           <Reveal delay={100}>
-            <div className="bg-white rounded-2xl shadow-2xl p-6 w-full max-w-md mx-auto">
-              {/* Header */}
-              <div className="flex items-center gap-3 mb-5 pb-4 border-b border-gray-100">
-                <div className="size-10 rounded-xl bg-turquoise/10 flex items-center justify-center">
-                  <Calendar className="size-5 text-turquoise" />
-                </div>
-                <div>
-                  <p className="font-semibold text-charcoal text-sm">Book a Service</p>
-                  <p className="text-xs text-muted-foreground">EPR Plumbing & Remodeling</p>
-                </div>
-              </div>
-
-              {/* Service selection */}
-              <p className="text-xs font-semibold text-charcoal/60 uppercase tracking-wider mb-3">Select Service</p>
-              <div className="grid grid-cols-2 gap-2 mb-4">
-                {SERVICES.slice(0, 4).map((s) => {
-                  const Icon = s.icon;
-                  return (
-                    <button key={s.key} onClick={() => setSelected(s.key)}
-                      className={`flex items-center gap-2 px-3 py-2.5 rounded-xl border text-sm font-medium transition ${
-                        selected === s.key
-                          ? "border-turquoise bg-turquoise/10 text-turquoise"
-                          : "border-gray-200 text-charcoal hover:border-turquoise/50 hover:bg-turquoise/5"
-                      }`}>
-                      <Icon className="size-4 shrink-0" />
-                      <span className="text-left leading-tight">{s.label}</span>
-                    </button>
-                  );
-                })}
-              </div>
-              <div className="grid grid-cols-4 gap-1.5 mb-5">
-                {SERVICES.slice(4).map((s) => (
-                  <button key={s.key} onClick={() => setSelected(s.key)}
-                    className={`px-2 py-1.5 rounded-lg border text-xs font-medium transition text-center leading-tight ${
-                      selected === s.key
-                        ? "border-turquoise bg-turquoise/10 text-turquoise"
-                        : "border-gray-200 text-charcoal/70 hover:border-turquoise/50"
-                    }`}>
-                    {s.label}
-                  </button>
-                ))}
-              </div>
-
-              {/* Priority flag for toilet leaks */}
-              {isToilet && (
-                <div className="flex items-start gap-2 bg-turquoise/8 border border-turquoise/30 rounded-xl px-3 py-2.5 mb-4 text-xs text-charcoal/80">
-                  <AlertTriangle className="size-4 text-turquoise shrink-0 mt-0.5" />
-                  <span><strong className="text-turquoise">Priority dispatch</strong> — toilet issues are flagged for our fastest available tech.</span>
-                </div>
-              )}
-
-              {/* Appointment time picker */}
-              <p className="text-xs font-semibold text-charcoal/60 uppercase tracking-wider mb-3">Select Appointment Time</p>
-              <div className="relative mb-5">
-                <select
-                  value={timeSlot}
-                  onChange={(e) => setTimeSlot(e.target.value)}
-                  className={`w-full appearance-none rounded-xl border-2 px-4 py-3 pr-10 text-sm font-semibold focus:outline-none transition cursor-pointer ${
-                    isEmergency
-                      ? "border-charcoal bg-charcoal text-white"
-                      : "border-turquoise bg-turquoise/10 text-turquoise"
-                  }`}
-                >
-                  {TIME_SLOTS.map((slot) => (
-                    <option key={slot.key} value={slot.key} className="bg-white text-charcoal font-normal">
-                      {slot.emergency ? `${slot.label} — Emergency` : slot.label}
-                    </option>
-                  ))}
-                </select>
-                <div className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2">
-                  {isEmergency
-                    ? <Siren className="size-4 text-white" />
-                    : <Clock className="size-4 text-turquoise" />
-                  }
-                </div>
-              </div>
-
-              {isEmergency && (
-                <div className="flex items-start gap-2 bg-charcoal/5 border border-charcoal/20 rounded-xl px-3 py-2.5 mb-4 text-xs text-charcoal/80">
-                  <Siren className="size-4 text-charcoal shrink-0 mt-0.5" />
-                  <span><strong className="text-charcoal">Emergency rate applies</strong> — higher fee for after-hours service. We'll screen your request, confirm urgency, and dispatch fast. SMS & email confirmation sent instantly.</span>
-                </div>
-              )}
-
-              <a href={GHL_BOOKING_URL}
-                className="w-full bg-turquoise hover:opacity-90 text-white font-semibold py-3 rounded-xl flex items-center justify-center gap-2 transition shadow-turquoise">
-                {isEmergency ? <><Siren className="size-4" /> Request Emergency Service</> : <><Calendar className="size-4" /> Book My Appointment</>}
-                <ArrowRight className="size-4" />
-              </a>
-
-              <div className="mt-4 space-y-2">
-                {[
-                  "No payment required to book",
-                  "SMS & email confirmation sent instantly",
-                  "Licensed & Insured · Open 24 Hours",
-                ].map((item) => (
-                  <div key={item} className="flex items-center gap-2 text-xs text-charcoal/60">
-                    <CheckCircle2 className="size-3.5 text-turquoise shrink-0" />
-                    <span>{item}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
+            <iframe
+              src={GHL_CALENDAR_SRC}
+              id={GHL_CALENDAR_ID}
+              className="rounded-2xl shadow-2xl w-full"
+              style={{ border: "none", overflow: "hidden", minHeight: "650px" }}
+              scrolling="no"
+            />
           </Reveal>
         </div>
       </div>
