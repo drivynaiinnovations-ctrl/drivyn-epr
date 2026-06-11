@@ -11,7 +11,6 @@ import hero2 from "@/assets/is-your-toilet-leaking.jpg";
 import hero3 from "@/assets/plumber-fixing-toilet-washroom.jpg";
 import hero4 from "@/assets/Garbage-Disposal-Repair.jpg";
 import { VoiceWidget } from "@/components/site/VoiceWidget";
-import { AlexChat } from "@/components/site/AlexChat";
 import { Reveal } from "@/components/site/Reveal";
 import { SiteHeader } from "@/components/site/SiteHeader";
 import { SiteFooter } from "@/components/site/SiteFooter";
@@ -103,11 +102,10 @@ function TypeWriter({ text }: { text: string }) {
 }
 
 function Index() {
-  const [bookingOpen, setBookingOpen] = useState(false);
   return (
     <div className="min-h-screen bg-background text-charcoal">
       <SiteHeader bookHref="#book-service" />
-      <Hero onBook={() => setBookingOpen(true)} />
+      <Hero />
       <TrustBar />
       <BookingWidget />
       <WhoWeServe />
@@ -116,16 +114,15 @@ function Index() {
       <HowItWorks />
       <GoogleReviews />
       <ServiceArea />
-      <FinalCTA onBook={() => setBookingOpen(true)} />
+      <FinalCTA />
       <SiteFooter />
       <VoiceWidget />
-      <AlexChat open={bookingOpen} onClose={() => setBookingOpen(false)} />
     </div>
   );
 }
 
 
-function Hero({ onBook }: { onBook: () => void }) {
+function Hero() {
   const [slide, setSlide] = useState(0);
   const total = HERO_SLIDES.length;
 
@@ -152,10 +149,10 @@ function Hero({ onBook }: { onBook: () => void }) {
           </p>
         </div>
         <div className="flex flex-col gap-3">
-          <button onClick={onBook}
+          <a href="#book-service"
             className="bg-turquoise text-white font-semibold px-6 py-4 rounded-xl text-base flex items-center justify-center gap-2 hover:opacity-90 shadow-turquoise transition">
             <Calendar className="size-5" /> Schedule Service Now!
-          </button>
+          </a>
           <a href={`tel:${PHONE}`}
             className="border-2 border-white/30 text-white font-semibold px-6 py-4 rounded-xl flex items-center justify-center gap-2 hover:border-turquoise hover:text-turquoise transition">
             <Phone className="size-5" /> Call Us Now!
@@ -693,7 +690,7 @@ function ServiceArea() {
   );
 }
 
-function FinalCTA({ onBook }: { onBook: () => void }) {
+function FinalCTA() {
   return (
     <section id="book" className="bg-charcoal py-24 relative overflow-hidden scroll-mt-16">
       <div className="absolute inset-0 bg-gradient-to-br from-turquoise/10 via-transparent to-transparent" />
