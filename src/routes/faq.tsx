@@ -14,7 +14,11 @@ export const Route = createFileRoute("/faq")({
       { name: "description", content: "Expert plumbing answers from EPR Plumbing & Remodeling. Burst pipes, sewage backups, water heater issues, pricing, prevention tips, and more. Serving Southern Maryland, DC & Northern Virginia." },
       { property: "og:title", content: "Plumbing FAQ | EPR Plumbing & Remodeling" },
       { property: "og:description", content: "Get straight answers to the most common plumbing questions — from emergencies to prevention." },
+      { property: "og:url", content: "https://eprplumbingandremodeling.com/faq" },
       { name: "robots", content: "index, follow" },
+    ],
+    links: [
+      { rel: "canonical", href: "https://eprplumbingandremodeling.com/faq" },
     ],
   }),
 });

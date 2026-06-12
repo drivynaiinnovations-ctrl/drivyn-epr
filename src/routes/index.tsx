@@ -31,7 +31,11 @@ export const Route = createFileRoute("/")({
         { name: "description", content: `Licensed plumbers serving ${locationLabel} — drain cleaning, water heaters, pipe repair & emergency service 24/7. Residential, commercial & government. Call (240) 381-9035.` },
         { property: "og:title", content: `EPR Plumbing & Remodeling — ${locationLabel}` },
         { property: "og:description", content: `Trusted plumbing and remodeling for homes, businesses, and government facilities in ${locationLabel}. Licensed, insured, open 24 hours.` },
-        { property: "og:image", content: hero1 },
+        { property: "og:url", content: "https://eprplumbingandremodeling.com/" },
+        { property: "og:image", content: "https://eprplumbingandremodeling.com/og-image.jpg" },
+      ],
+      links: [
+        { rel: "canonical", href: "https://eprplumbingandremodeling.com/" },
       ],
     };
   },

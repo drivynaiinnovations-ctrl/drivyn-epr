@@ -258,14 +258,19 @@ export const Route = createFileRoute("/locations/$slug")({
   },
   head: ({ loaderData }) => {
     if (!loaderData?.loc) return {};
-    const { loc } = loaderData;
+    const { loc, slug } = loaderData;
+    const canonical = `https://eprplumbingandremodeling.com/locations/${slug}`;
     return {
       meta: [
         { title: loc.title },
         { name: "description", content: loc.description },
         { property: "og:title", content: loc.title },
         { property: "og:description", content: loc.description },
+        { property: "og:url", content: canonical },
         { name: "robots", content: "index, follow" },
+      ],
+      links: [
+        { rel: "canonical", href: canonical },
       ],
     };
   },

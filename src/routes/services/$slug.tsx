@@ -428,15 +428,20 @@ export const Route = createFileRoute("/services/$slug")({
   },
   head: ({ loaderData }) => {
     if (!loaderData?.svc) return {};
-    const { svc } = loaderData;
+    const { svc, slug } = loaderData;
+    const canonical = `https://eprplumbingandremodeling.com/services/${slug}`;
     return {
       meta: [
         { title: svc.title },
         { name: "description", content: svc.description },
         { property: "og:title", content: svc.title },
         { property: "og:description", content: svc.description },
+        { property: "og:url", content: canonical },
         { property: "og:type", content: "website" },
         { name: "robots", content: "index, follow" },
+      ],
+      links: [
+        { rel: "canonical", href: canonical },
       ],
     };
   },
