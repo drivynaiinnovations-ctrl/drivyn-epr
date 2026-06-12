@@ -257,26 +257,13 @@ const SERVICES = [
   { key: "disposal",    label: "Garbage Disposal",   icon: Wrench,        priority: false },
 ] as const;
 
-const TIME_SLOTS = [
-  { key: "9am-11am",  label: "9am – 11am",  emergency: false },
-  { key: "11am-1pm",  label: "11am – 1pm",  emergency: false },
-  { key: "1pm-3pm",   label: "1pm – 3pm",   emergency: false },
-  { key: "3pm-6pm",   label: "3pm – 6pm",   emergency: true  },
-  { key: "after-7pm", label: "After 7pm",   emergency: true  },
-] as const;
-
 function BookingWidget() {
   const [selected, setSelected] = useState<string>("drain");
-  const [timeSlot, setTimeSlot] = useState<string>("9am-11am");
   const [showCalendar, setShowCalendar] = useState(false);
 
   const isToilet = selected === "toilet";
-  const isEmergency = TIME_SLOTS.find((s) => s.key === timeSlot)?.emergency ?? false;
   const selectedService = SERVICES.find((s) => s.key === selected);
-
-  const calendarUrl = `${GHL_CALENDAR_SRC}?notes=${encodeURIComponent(
-    `Service: ${selectedService?.label ?? ""} | Time: ${TIME_SLOTS.find((s) => s.key === timeSlot)?.label ?? ""}${isEmergency ? " (Emergency)" : ""}`
-  )}`;
+  const calendarUrl = `${GHL_CALENDAR_SRC}?notes=${encodeURIComponent(`Service: ${selectedService?.label ?? ""}`)}`;
 
   useEffect(() => {
     if (!showCalendar) return;
@@ -298,12 +285,12 @@ function BookingWidget() {
                 Book Your Service <br />in Seconds.
               </h2>
               <p className="text-lg text-muted-foreground leading-relaxed mb-6">
-                Select your service, pick a time window, and we'll handle the rest. Standard slots run 9am–3pm. After 3pm and evening slots are emergency rate — same licensed crew, priority dispatch.
+                Select your service and we'll connect you with the next available time. Same-day slots available — emergency dispatch after hours.
               </p>
               <ul className="hidden md:block space-y-3">
                 {[
-                  "9am – 11am, 11am – 1pm, 1pm – 3pm: standard rate",
-                  "3pm – 6pm & After 7pm: emergency rate applies",
+                  "Same-day and next-morning availability",
+                  "Emergency dispatch available after hours",
                   "SMS & email confirmation sent instantly",
                   "Toilet leaks flagged for priority dispatch",
                 ].map((item) => (
@@ -319,7 +306,6 @@ function BookingWidget() {
           <Reveal delay={100}>
             {showCalendar ? (
               <div className="rounded-2xl shadow-2xl overflow-hidden bg-white">
-                {/* Calendar header with back + selected service summary */}
                 <div className="flex items-center justify-between px-5 py-3 border-b border-gray-100">
                   <button
                     onClick={() => setShowCalendar(false)}
@@ -327,15 +313,8 @@ function BookingWidget() {
                     <ArrowRight className="size-4 rotate-180" /> Change Service
                   </button>
                   <div className="flex items-center gap-2 text-sm font-semibold text-charcoal">
-                    {isEmergency
-                      ? <Siren className="size-4 text-charcoal" />
-                      : <Calendar className="size-4 text-turquoise" />}
+                    <Calendar className="size-4 text-turquoise" />
                     <span>{selectedService?.label}</span>
-                    <span className="text-muted-foreground font-normal">·</span>
-                    <span className="text-muted-foreground font-normal">
-                      {TIME_SLOTS.find((s) => s.key === timeSlot)?.label}
-                      {isEmergency && " (Emergency)"}
-                    </span>
                   </div>
                 </div>
                 <iframe
@@ -348,7 +327,6 @@ function BookingWidget() {
               </div>
             ) : (
               <div className="bg-white rounded-2xl shadow-2xl p-6 w-full max-w-md mx-auto">
-                {/* Header */}
                 <div className="flex items-center gap-3 mb-5 pb-4 border-b border-gray-100">
                   <div className="size-10 rounded-xl bg-turquoise/10 flex items-center justify-center">
                     <Calendar className="size-5 text-turquoise" />
@@ -359,7 +337,6 @@ function BookingWidget() {
                   </div>
                 </div>
 
-                {/* Service selection */}
                 <p className="text-xs font-semibold text-charcoal/60 uppercase tracking-wider mb-3">Select Service</p>
                 <div className="grid grid-cols-2 gap-2 mb-4">
                   {SERVICES.slice(0, 4).map((s) => {
@@ -390,7 +367,6 @@ function BookingWidget() {
                   ))}
                 </div>
 
-                {/* Priority flag for toilet */}
                 {isToilet && (
                   <div className="flex items-start gap-2 bg-turquoise/8 border border-turquoise/30 rounded-xl px-3 py-2.5 mb-4 text-xs text-charcoal/80">
                     <AlertTriangle className="size-4 text-turquoise shrink-0 mt-0.5" />
@@ -398,43 +374,10 @@ function BookingWidget() {
                   </div>
                 )}
 
-                {/* Time picker */}
-                <p className="text-xs font-semibold text-charcoal/60 uppercase tracking-wider mb-3">Select Appointment Time</p>
-                <div className="relative mb-5">
-                  <select
-                    value={timeSlot}
-                    onChange={(e) => setTimeSlot(e.target.value)}
-                    className={`w-full appearance-none rounded-xl border-2 px-4 py-3 pr-10 text-sm font-semibold focus:outline-none transition cursor-pointer ${
-                      isEmergency
-                        ? "border-charcoal bg-charcoal text-white"
-                        : "border-turquoise bg-turquoise/10 text-turquoise"
-                    }`}>
-                    {TIME_SLOTS.map((slot) => (
-                      <option key={slot.key} value={slot.key} className="bg-white text-charcoal font-normal">
-                        {slot.emergency ? `${slot.label} — Emergency` : slot.label}
-                      </option>
-                    ))}
-                  </select>
-                  <div className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2">
-                    {isEmergency
-                      ? <Siren className="size-4 text-white" />
-                      : <Clock className="size-4 text-turquoise" />}
-                  </div>
-                </div>
-
-                {isEmergency && (
-                  <div className="flex items-start gap-2 bg-charcoal/5 border border-charcoal/20 rounded-xl px-3 py-2.5 mb-4 text-xs text-charcoal/80">
-                    <Siren className="size-4 text-charcoal shrink-0 mt-0.5" />
-                    <span><strong className="text-charcoal">Emergency rate applies</strong> — higher fee for after-hours service. We'll screen your request, confirm urgency, and dispatch fast.</span>
-                  </div>
-                )}
-
                 <button
                   onClick={() => setShowCalendar(true)}
                   className="w-full bg-turquoise hover:opacity-90 text-white font-semibold py-3 rounded-xl flex items-center justify-center gap-2 transition shadow-turquoise">
-                  {isEmergency
-                    ? <><Siren className="size-4" /> Request Emergency Service</>
-                    : <><Calendar className="size-4" /> Book My Appointment</>}
+                  <Calendar className="size-4" /> See Available Times
                   <ArrowRight className="size-4" />
                 </button>
 
