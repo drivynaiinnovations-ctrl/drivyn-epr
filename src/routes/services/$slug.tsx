@@ -7,7 +7,6 @@ import {
 import { SiteHeader } from "@/components/site/SiteHeader";
 import { SiteFooter } from "@/components/site/SiteFooter";
 import { Reveal } from "@/components/site/Reveal";
-import { VoiceWidget } from "@/components/site/VoiceWidget";
 
 const PHONE = "(240) 525-9592";
 const GHL_BOOKING_URL = "#book";
@@ -761,7 +760,6 @@ function ServicePage() {
       </section>
 
       <SiteFooter />
-      <VoiceWidget />
     </div>
   );
 }

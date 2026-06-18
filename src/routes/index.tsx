@@ -10,7 +10,6 @@ import hero1 from "@/assets/damaged-pipe-with-leaking.jpg";
 import hero2 from "@/assets/is-your-toilet-leaking.jpg";
 import hero3 from "@/assets/plumber-fixing-toilet-washroom.jpg";
 import hero4 from "@/assets/Garbage-Disposal-Repair.jpg";
-import { VoiceWidget } from "@/components/site/VoiceWidget";
 import { Reveal } from "@/components/site/Reveal";
 import { SiteHeader } from "@/components/site/SiteHeader";
 import { SiteFooter } from "@/components/site/SiteFooter";
@@ -120,7 +119,6 @@ function Index() {
       <ServiceArea />
       <FinalCTA />
       <SiteFooter />
-      <VoiceWidget />
     </div>
   );
 }
