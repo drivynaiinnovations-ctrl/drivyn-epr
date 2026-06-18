@@ -9,7 +9,7 @@ import { SiteFooter } from "@/components/site/SiteFooter";
 import { Reveal } from "@/components/site/Reveal";
 import { VoiceWidget } from "@/components/site/VoiceWidget";
 
-const PHONE = "(240) 381-9035";
+const PHONE = "(240) 525-9592";
 const GHL_BOOKING_URL = "#book";
 const AREA = "La Plata, Waldorf, White Plains, Indian Head, Clinton, Bowie, Upper Marlboro, Prince Frederick & Leonardtown";
 
@@ -19,7 +19,7 @@ const SERVICES_DATA = {
     name: "Drain Cleaning",
     icon: Droplets,
     title: "Drain Cleaning Services in La Plata & Southern Maryland | EPR Plumbing",
-    description: "Professional drain cleaning in La Plata, Waldorf & Charles County MD. Hydro-jetting, sewer snaking, clogged sinks & toilets cleared same day. Call (240) 381-9035.",
+    description: "Professional drain cleaning in La Plata, Waldorf & Charles County MD. Hydro-jetting, sewer snaking, clogged sinks & toilets cleared same day. Call (240) 525-9592.",
     badge: "Drain & Sewer Specialists",
     heroLine1: "Clogged Drain?",
     heroLine2: "Fixed Today.",
@@ -48,7 +48,7 @@ const SERVICES_DATA = {
     ],
     faq: [
       { q: "How long does drain cleaning take?", a: "Most drain cleanings take 1–2 hours. Hydro-jetting a full sewer line may take 2–3 hours depending on line length and severity." },
-      { q: "Can you clear drains same day?", a: "Yes — we offer same-day drain cleaning throughout Southern Maryland. Call (240) 381-9035 and we'll get a tech to you fast." },
+      { q: "Can you clear drains same day?", a: "Yes — we offer same-day drain cleaning throughout Southern Maryland. Call (240) 525-9592 and we'll get a tech to you fast." },
       { q: "Is hydro-jetting safe for older pipes?", a: "Yes, when done by a trained technician. We inspect the pipe condition first and adjust water pressure accordingly to avoid damage." },
       { q: "Why does my drain keep clogging?", a: "Recurring clogs usually mean there's a deeper buildup or a structural issue like root intrusion or a partially collapsed pipe. Camera inspection will find it." },
       { q: "Do you serve commercial properties?", a: "Absolutely. EPR handles grease trap cleaning and commercial sewer line service throughout Charles, Prince George's, Calvert & St. Mary's Counties." },
@@ -59,7 +59,7 @@ const SERVICES_DATA = {
     name: "Water Heater Service",
     icon: Gauge,
     title: "Water Heater Repair & Replacement in La Plata MD | EPR Plumbing",
-    description: "Water heater repair, replacement & installation in La Plata & Southern Maryland. Tank & tankless, same-day service. Licensed plumbers — call (240) 381-9035.",
+    description: "Water heater repair, replacement & installation in La Plata & Southern Maryland. Tank & tankless, same-day service. Licensed plumbers — call (240) 525-9592.",
     badge: "Water Heater Experts · Same-Day Service",
     heroLine1: "No Hot Water?",
     heroLine2: "Fixed Today.",
@@ -89,7 +89,7 @@ const SERVICES_DATA = {
     faq: [
       { q: "How long does a water heater last?", a: "Traditional tank heaters last 8–12 years. Tankless units last 15–20 years with proper maintenance. If yours is over 10 years old and causing problems, replacement is usually more cost-effective than repair." },
       { q: "Should I repair or replace my water heater?", a: "If the tank is leaking, heavily corroded, or over 10 years old, replacement is usually the smarter investment. EPR will give you an honest recommendation with no upsell pressure." },
-      { q: "Can you replace a water heater same day?", a: "Yes. For standard tank replacements, we typically complete same-day installation throughout Southern Maryland. Call us at (240) 381-9035 to confirm availability." },
+      { q: "Can you replace a water heater same day?", a: "Yes. For standard tank replacements, we typically complete same-day installation throughout Southern Maryland. Call us at (240) 525-9592 to confirm availability." },
       { q: "What size water heater do I need?", a: "A 40-gallon tank works for 1–3 people; 50 gallons for 3–5. For larger households or commercial use, we'll size the unit correctly during the visit." },
       { q: "Do you service tankless water heaters?", a: "Absolutely. We install, repair, and perform annual descaling and maintenance on all major tankless brands including Navien, Rinnai, and Rheem." },
     ],
@@ -99,7 +99,7 @@ const SERVICES_DATA = {
     name: "Pipe Repair & Repiping",
     icon: Wrench,
     title: "Pipe Repair & Repiping in Southern Maryland | EPR Plumbing La Plata",
-    description: "Burst pipe repair, leak detection & whole-house repiping in La Plata & Southern Maryland. Fast emergency response. Licensed plumbers — call (240) 381-9035.",
+    description: "Burst pipe repair, leak detection & whole-house repiping in La Plata & Southern Maryland. Fast emergency response. Licensed plumbers — call (240) 525-9592.",
     badge: "Pipe & Leak Repair Specialists",
     heroLine1: "Burst Pipe?",
     heroLine2: "We Fix It Fast.",
@@ -127,7 +127,7 @@ const SERVICES_DATA = {
       { n: "04", title: "Test & Restore Pressure", body: "After repair, we pressure-test the entire system to confirm there are no additional leaks and your water pressure is correct." },
     ],
     faq: [
-      { q: "What should I do if a pipe bursts?", a: "Shut off your main water valve immediately, then call EPR at (240) 381-9035. We offer emergency dispatch 24/7 across Southern Maryland." },
+      { q: "What should I do if a pipe bursts?", a: "Shut off your main water valve immediately, then call EPR at (240) 525-9592. We offer emergency dispatch 24/7 across Southern Maryland." },
       { q: "How do you find a slab leak without tearing up the floor?", a: "We use electronic leak detection and pressure testing to locate slab leaks precisely, minimizing concrete removal and repair costs." },
       { q: "Is whole-house repiping worth it?", a: "For homes over 40 years old with original galvanized or polybutylene pipes, repiping prevents chronic leaks, improves water quality, and protects your home's value." },
       { q: "How long does pipe repair take?", a: "Simple repairs take 1–3 hours. Slab leaks or repiping projects are planned over 1–3 days depending on home size." },
@@ -139,7 +139,7 @@ const SERVICES_DATA = {
     name: "Fixture Installation",
     icon: Home,
     title: "Plumbing Fixture Installation in La Plata MD | EPR Plumbing",
-    description: "Professional faucet, sink, toilet & shower fixture installation in Southern Maryland. Licensed plumbers, clean work, no mess left behind. Call (240) 381-9035.",
+    description: "Professional faucet, sink, toilet & shower fixture installation in Southern Maryland. Licensed plumbers, clean work, no mess left behind. Call (240) 525-9592.",
     badge: "Fixture & Appliance Specialists",
     heroLine1: "New Fixtures.",
     heroLine2: "Done Right.",
@@ -179,7 +179,7 @@ const SERVICES_DATA = {
     name: "Toilet Repair & Installation",
     icon: AlertTriangle,
     title: "Toilet Repair & Installation in Southern Maryland | EPR Plumbing",
-    description: "Emergency toilet repair, leaking toilet fix & toilet installation in La Plata, Waldorf & Southern Maryland. Priority dispatch — call (240) 381-9035.",
+    description: "Emergency toilet repair, leaking toilet fix & toilet installation in La Plata, Waldorf & Southern Maryland. Priority dispatch — call (240) 525-9592.",
     badge: "Priority Dispatch · Toilet Specialists",
     heroLine1: "Toilet Leaking?",
     heroLine2: "Priority Dispatch.",
@@ -207,7 +207,7 @@ const SERVICES_DATA = {
       { n: "04", title: "Test & Confirm", body: "We flush multiple times, check all connections, and confirm the floor is dry before leaving." },
     ],
     faq: [
-      { q: "Is a leaking toilet an emergency?", a: "Yes — a toilet leaking at the base or running constantly can waste hundreds of gallons daily and cause floor damage. Call EPR at (240) 381-9035 for priority dispatch." },
+      { q: "Is a leaking toilet an emergency?", a: "Yes — a toilet leaking at the base or running constantly can waste hundreds of gallons daily and cause floor damage. Call EPR at (240) 525-9592 for priority dispatch." },
       { q: "Why is my toilet leaking at the base?", a: "Usually a failed wax ring seal between the toilet and the flange. This requires removing the toilet and replacing the wax ring — a straightforward repair for a licensed plumber." },
       { q: "Why does my toilet keep running?", a: "Almost always a worn flapper or faulty fill valve. Parts are inexpensive and the repair takes under an hour in most cases." },
       { q: "How long does a toilet replacement take?", a: "Standard toilet replacement takes 1–2 hours including shutoff, removal, new toilet installation, and testing." },
@@ -219,7 +219,7 @@ const SERVICES_DATA = {
     name: "Sewer Line Service",
     icon: Zap,
     title: "Sewer Line Repair & Replacement in Southern Maryland | EPR Plumbing",
-    description: "Sewer line inspection, repair & replacement in La Plata & Southern Maryland. Camera inspection, hydro-jetting, trenchless options. Call (240) 381-9035.",
+    description: "Sewer line inspection, repair & replacement in La Plata & Southern Maryland. Camera inspection, hydro-jetting, trenchless options. Call (240) 525-9592.",
     badge: "Sewer Line Specialists · Camera Inspection",
     heroLine1: "Sewer Backup?",
     heroLine2: "We Handle It.",
@@ -259,7 +259,7 @@ const SERVICES_DATA = {
     name: "Leak Detection",
     icon: Droplets,
     title: "Leak Detection Services in La Plata & Southern Maryland | EPR Plumbing",
-    description: "Professional water leak detection in Southern Maryland. Slab leaks, hidden pipe leaks & wall leaks found without unnecessary damage. Call (240) 381-9035.",
+    description: "Professional water leak detection in Southern Maryland. Slab leaks, hidden pipe leaks & wall leaks found without unnecessary damage. Call (240) 525-9592.",
     badge: "Precision Leak Detection · Minimal Damage",
     heroLine1: "Hidden Leak?",
     heroLine2: "We'll Find It.",
@@ -299,7 +299,7 @@ const SERVICES_DATA = {
     name: "Garbage Disposal",
     icon: Wrench,
     title: "Garbage Disposal Repair & Installation in Southern Maryland | EPR Plumbing",
-    description: "Garbage disposal repair, replacement & installation in La Plata & Southern Maryland. All brands, same-day service. Licensed plumbers — call (240) 381-9035.",
+    description: "Garbage disposal repair, replacement & installation in La Plata & Southern Maryland. All brands, same-day service. Licensed plumbers — call (240) 525-9592.",
     badge: "Garbage Disposal Specialists",
     heroLine1: "Disposal Jammed",
     heroLine2: "or Dead? Fixed.",
@@ -339,7 +339,7 @@ const SERVICES_DATA = {
     name: "Emergency Plumbing",
     icon: Siren,
     title: "24/7 Emergency Plumbing in La Plata & Southern Maryland | EPR Plumbing",
-    description: "24/7 emergency plumber in La Plata, Waldorf & Southern Maryland. Burst pipes, flood response, sewer backup — fast dispatch, higher rate after 3pm. Call (240) 381-9035.",
+    description: "24/7 emergency plumber in La Plata, Waldorf & Southern Maryland. Burst pipes, flood response, sewer backup — fast dispatch, higher rate after 3pm. Call (240) 525-9592.",
     badge: "24/7 Emergency Dispatch · Fast Response",
     heroLine1: "Plumbing Emergency?",
     heroLine2: "We Come to You.",
@@ -361,7 +361,7 @@ const SERVICES_DATA = {
       "Toilet leaking at base with water on floor",
     ],
     process: [
-      { n: "01", title: "Call or Book", body: "Call (240) 381-9035 or book online. After 3pm, our emergency line connects you to a live team member immediately." },
+      { n: "01", title: "Call or Book", body: "Call (240) 525-9592 or book online. After 3pm, our emergency line connects you to a live team member immediately." },
       { n: "02", title: "We Screen & Confirm", body: "We ask about the nature of the emergency, confirm urgency with empathy, and make sure you know this is an after-hours service." },
       { n: "03", title: "Dispatch & Update", body: "A licensed EPR tech is dispatched immediately. You get an SMS and email confirmation with job summary sent to our night-duty manager." },
       { n: "04", title: "Fix It Tonight", body: "Our tech arrives, resolves the emergency, and ensures your home is stable before leaving — no partial fixes, no callbacks." },
@@ -379,7 +379,7 @@ const SERVICES_DATA = {
     name: "Plumbing Inspections",
     icon: ShieldCheck,
     title: "Plumbing Inspections & Preventive Maintenance in Southern Maryland | EPR Plumbing",
-    description: "Pre-purchase plumbing inspections, backflow testing & preventive maintenance in La Plata & Southern Maryland. Licensed plumbers — call (240) 381-9035.",
+    description: "Pre-purchase plumbing inspections, backflow testing & preventive maintenance in La Plata & Southern Maryland. Licensed plumbers — call (240) 525-9592.",
     badge: "Inspections & Preventive Maintenance",
     heroLine1: "Catch Problems",
     heroLine2: "Before They Start.",
@@ -483,7 +483,7 @@ function buildSchemas(svc: (typeof SERVICES_DATA)[ServiceSlug]) {
     image: "https://epr-plumbing-app.drivyn-ai-innovations.workers.dev",
     "@id": "https://epr-plumbing-app.drivyn-ai-innovations.workers.dev",
     url: "https://epr-plumbing-app.drivyn-ai-innovations.workers.dev",
-    telephone: "+12403819035",
+    telephone: "+12405259592",
     address: {
       "@type": "PostalAddress",
       streetAddress: "8270 Fairground Rd",

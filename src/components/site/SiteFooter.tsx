@@ -2,7 +2,7 @@
 import { Phone, Mail, Droplets } from "lucide-react";
 import { SERVICE_NAV } from "./SiteHeader";
 
-const PHONE = "(240) 381-9035";
+const PHONE = "(240) 525-9592";
 const EMAIL = "GetStarted@eprplumbingandremodeling.com";
 const ADDRESS = "8270 Fairground Rd, La Plata, MD 20646";
 

@@ -28,7 +28,7 @@ export const Route = createFileRoute("/")({
     return {
       meta: [
         { title: `Plumber ${titleCity} | EPR Plumbing & Remodeling` },
-        { name: "description", content: `Licensed plumbers serving ${locationLabel} — drain cleaning, water heaters, pipe repair & emergency service 24/7. Residential, commercial & government. Call (240) 381-9035.` },
+        { name: "description", content: `Licensed plumbers serving ${locationLabel} — drain cleaning, water heaters, pipe repair & emergency service 24/7. Residential, commercial & government. Call (240) 525-9592.` },
         { property: "og:title", content: `EPR Plumbing & Remodeling — ${locationLabel}` },
         { property: "og:description", content: `Trusted plumbing and remodeling for homes, businesses, and government facilities in ${locationLabel}. Licensed, insured, open 24 hours.` },
         { property: "og:url", content: "https://eprplumbingandremodeling.com/" },
@@ -41,7 +41,7 @@ export const Route = createFileRoute("/")({
   },
 });
 
-const PHONE = "(240) 381-9035";
+const PHONE = "(240) 525-9592";
 const EMAIL = "GetStarted@eprplumbingandremodeling.com";
 const ADDRESS = "8270 Fairground Rd, La Plata, MD 20646";
 const GOOGLE_REVIEW_COUNT = 47; // Update with actual Google review count

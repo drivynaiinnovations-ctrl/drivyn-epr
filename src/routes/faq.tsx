@@ -4,7 +4,7 @@ import { Phone, ChevronDown, AlertTriangle, Wrench, DollarSign, ShieldCheck, Cal
 import { SiteHeader } from "@/components/site/SiteHeader";
 import { SiteFooter } from "@/components/site/SiteFooter";
 
-const PHONE = "(240) 381-9035";
+const PHONE = "(240) 525-9592";
 
 export const Route = createFileRoute("/faq")({
   component: FaqPage,
@@ -26,7 +26,7 @@ export const Route = createFileRoute("/faq")({
 const EMERGENCY_STEPS = [
   {
     label: "Burst Pipe / Major Leak",
-    steps: ["Shut main water valve (clockwise)", "Turn off electricity near affected area", "Open lowest faucet to release pressure", "Take photos for insurance", "Call EPR — (240) 381-9035"],
+    steps: ["Shut main water valve (clockwise)", "Turn off electricity near affected area", "Open lowest faucet to release pressure", "Take photos for insurance", "Call EPR — (240) 525-9592"],
   },
   {
     label: "Sewage Backup",
@@ -38,7 +38,7 @@ const EMERGENCY_STEPS = [
   },
   {
     label: "Water Heater Leaking",
-    steps: ["Shut cold water supply line to heater", "Turn off power (breaker or gas to pilot)", "Call EPR — (240) 381-9035"],
+    steps: ["Shut cold water supply line to heater", "Turn off power (breaker or gas to pilot)", "Call EPR — (240) 525-9592"],
   },
   {
     label: "Frozen Pipes",
