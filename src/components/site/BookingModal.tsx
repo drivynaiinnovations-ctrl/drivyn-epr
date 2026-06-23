@@ -116,6 +116,10 @@ export function BookingModal({ open, onClose }: { open: boolean; onClose: () => 
               </div>
             </div>
 
+            <p className="text-xs text-muted-foreground -mt-1">
+              By providing your phone number you agree to receive SMS appointment confirmations and reminders from Drivyn AI. Reply STOP to unsubscribe.
+            </p>
+
             <div>
               <label className="block text-xs font-semibold text-charcoal mb-1.5">Service Needed *</label>
               <select
