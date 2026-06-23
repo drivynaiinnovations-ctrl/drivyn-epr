@@ -8,6 +8,7 @@ import {
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
+import { useEffect } from "react";
 
 import appCss from "../styles.css?url";
 
@@ -115,16 +116,27 @@ function RootShell({ children }: { children: React.ReactNode }) {
 
 function ChatWidget() {
   const { pathname } = useLocation();
-  if (pathname === "/") return null;
-  return (
-    <script
-      src="https://widgets.leadconnectorhq.com/loader.js"
-      data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js"
-      data-widget-id="6a343b46110052ec1c73b0e1"
-      data-source="WEB_USER"
-      async
-    />
-  );
+
+  useEffect(() => {
+    if (pathname === "/") return;
+    if (document.getElementById("lc-chat-widget-script")) return;
+
+    const div = document.createElement("div");
+    div.setAttribute("data-chat-widget", "");
+    div.setAttribute("data-widget-id", "6a343b46110052ec1c73b0e1");
+    div.setAttribute("data-location-id", "Y7sbXGRjBcmn8TD4L1TG");
+    document.body.appendChild(div);
+
+    const script = document.createElement("script");
+    script.id = "lc-chat-widget-script";
+    script.src = "https://widgets.leadconnectorhq.com/loader.js";
+    script.setAttribute("data-resources-url", "https://widgets.leadconnectorhq.com/chat-widget/loader.js");
+    script.setAttribute("data-widget-id", "6a343b46110052ec1c73b0e1");
+    script.setAttribute("data-source", "WEB_USER");
+    document.body.appendChild(script);
+  }, [pathname]);
+
+  return null;
 }
 
 function RootComponent() {
