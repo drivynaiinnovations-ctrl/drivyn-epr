@@ -107,6 +107,13 @@ function RootShell({ children }: { children: React.ReactNode }) {
       <body>
         {children}
         <Scripts />
+        <script
+          src="https://widgets.leadconnectorhq.com/loader.js"
+          data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js"
+          data-widget-id="6a343b46110052ec1c73b0e1"
+          data-source="WEB_USER"
+          async
+        />
       </body>
     </html>
   );
